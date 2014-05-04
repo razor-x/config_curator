@@ -2,6 +2,13 @@
 
 by Evan Boyd Sosenko.
 
+[![Gem Version](http://img.shields.io/gem/v/config_curator.svg)](https://rubygems.org/gems/config_curator)
+[![MIT License](http://img.shields.io/badge/license-MIT-red.svg)](./LICENSE.txt)
+[![Dependency Status](http://img.shields.io/gemnasium/razor-x/config_curator.svg)](https://gemnasium.com/razor-x/config_curator)
+[![Build Status](http://img.shields.io/travis/razor-x/config_curator.svg)](https://travis-ci.org/razor-x/config_curator)
+[![Coverage Status](http://img.shields.io/coveralls/razor-x/config_curator.svg)](https://coveralls.io/r/razor-x/config_curator)
+[![Code Climate](http://img.shields.io/codeclimate/github/razor-x/config_curator.svg)](https://codeclimate.com/github/razor-x/config_curator)
+
 ## Installation
 
 Add this line to your application's Gemfile:
