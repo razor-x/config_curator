@@ -2,6 +2,8 @@ module ConfigCurator
 
   class PackageLookup
 
+    class LookupFailed < RuntimeError; end
+
     # Default list of supported package tools.
     TOOLS = %i(dpkg pacman)
 
@@ -28,12 +30,14 @@ module ConfigCurator
           return @tool
         end
       end
+      @tool
     end
 
     # Checks if package is installed.
     # @param package [String] package name to check
     # @return [Boolean] if package is installed
     def installed? package
+      fail LookupFailed, 'No supported package tool found.' if tool.nil?
       send tool, package
     end
 

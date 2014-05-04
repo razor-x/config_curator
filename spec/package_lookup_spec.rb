@@ -40,5 +40,11 @@ describe ConfigCurator::PackageLookup do
       expect(lookup).to receive(:dpkg).with('rsync')
       lookup.installed? 'rsync'
     end
+
+    it "fails when no package tool found" do
+      lookup.tools = %i(dpkg)
+      allow(lookup).to receive(:command?).with(:dpkg).and_return(false)
+      expect { lookup.installed? 'rsync' }.to raise_error ConfigCurator::PackageLookup::LookupFailed
+    end
   end
 end
