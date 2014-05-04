@@ -1,6 +1,6 @@
 module ConfigCurator
 
-  class Symlink
+  class Symlink < Unit
   end
 
 end
