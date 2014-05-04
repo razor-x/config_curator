@@ -21,6 +21,14 @@ Or install it yourself as:
 ````bash
 $ gem install config_curator
 ````
+## Documentation
+
+The primary documentation for Palimpsest is this README and the YARD source documentation.
+
+YARD documentation for all gem versions is hosted on the
+[Config Curator gem page](https://rubygems.org/gems/config_curator).
+Documentation for the latest commits is hosted on
+[the RubyDoc.info project page](http://rubydoc.info/github/razor-x/config_curator/frames).
 
 ## Usage
 
