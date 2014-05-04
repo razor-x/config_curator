@@ -5,5 +5,6 @@ require 'config_curator/component'
 require 'config_curator/collection'
 require 'config_curator/cli'
 
+# Simple and intelligent configuration file management.
 module ConfigCurator
 end
