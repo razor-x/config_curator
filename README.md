@@ -2,6 +2,8 @@
 
 by Evan Boyd Sosenko.
 
+_Simple and intelligent configuration file management._
+
 [![Gem Version](http://img.shields.io/gem/v/config_curator.svg)](https://rubygems.org/gems/config_curator)
 [![MIT License](http://img.shields.io/badge/license-MIT-red.svg)](./LICENSE.txt)
 [![Dependency Status](http://img.shields.io/gemnasium/razor-x/config_curator.svg)](https://gemnasium.com/razor-x/config_curator)

@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = ConfigCurator::VERSION
   spec.authors       = ['Evan Boyd Sosenko']
   spec.email         = ['razorx@evansosenko.com']
-  spec.summary       = %q{}
+  spec.summary       = %q{Simple and intelligent configuration file management.}
   spec.description   = %q{}
   spec.homepage      = 'https://github.com/razor-x/config_curator'
   spec.license       = 'MIT'
