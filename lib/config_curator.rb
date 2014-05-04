@@ -1,4 +1,5 @@
 require 'config_curator/version'
+require 'config_curator/package_lookup'
 require 'config_curator/unit'
 require 'config_curator/file'
 require 'config_curator/symlink'
