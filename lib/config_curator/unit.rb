@@ -4,6 +4,9 @@ module ConfigCurator
 
   class Unit
 
+    # Error if the unit will fail to install.
+    class InstallFailed < RuntimeError; end
+
     attr_accessor :hosts, :packages
 
     # Default {#options}.
