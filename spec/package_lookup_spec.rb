@@ -21,12 +21,12 @@ describe ConfigCurator::PackageLookup do
 
   describe ".tool" do
 
-    it "retuns the tool when set" do
+    it "returns the tool when set" do
       lookup.tool = :pacman
       expect(lookup.tool).to eq :pacman
     end
 
-    it "retuns the first avaible tool when not set" do
+    it "returns the first avaible tool when not set" do
       allow(lookup).to receive(:command?).with(:dpkg).and_return(true)
       lookup.tools = %i(dpkg pacman)
       expect(lookup.tool).to eq :dpkg
