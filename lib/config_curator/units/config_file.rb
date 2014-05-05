@@ -4,6 +4,7 @@ module ConfigCurator
 
     attr_accessor :mode, :owner, :group
 
+    # @see Unit#destination
     def destination
       super
       @destination ||= source
