@@ -13,7 +13,7 @@ module ConfigCurator
     attr_accessor :tool, :tools
 
     def initialize tool: nil
-      @tool = tool
+      self.tool = tool
     end
 
     # Package tools that support package lookup ordered by preference.
