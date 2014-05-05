@@ -30,21 +30,21 @@ describe ConfigCurator::Unit do
     end
   end
 
-  describe ".hosts" do
+  describe "#hosts" do
 
     it "is empty by default" do
       expect(unit.hosts).to eq []
     end
   end
 
-  describe ".packages" do
+  describe "#packages" do
 
     it "is empty by default" do
       expect(unit.packages).to eq []
     end
   end
 
-  describe ".package_lookup" do
+  describe "#package_lookup" do
 
     it "returns a PackageLookup object" do
       expect(unit.package_lookup).to be_a ConfigCurator::PackageLookup
@@ -77,7 +77,7 @@ describe ConfigCurator::Unit do
     end
   end
 
-  describe ".allowed_host?" do
+  describe "#allowed_host?" do
 
     it "allows any host when no hosts are given" do
       unit.hosts = []

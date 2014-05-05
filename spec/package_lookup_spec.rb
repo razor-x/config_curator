@@ -12,14 +12,14 @@ describe ConfigCurator::PackageLookup do
     end
   end
 
-  describe ".tools" do
+  describe "#tools" do
 
     it "uses the default list of tools" do
       expect(lookup.tools).to eq ConfigCurator::PackageLookup::TOOLS
     end
   end
 
-  describe ".tool" do
+  describe "#tool" do
 
     it "returns the tool when set" do
       lookup.tool = :pacman
@@ -33,7 +33,7 @@ describe ConfigCurator::PackageLookup do
     end
   end
 
-  describe ".installed?" do
+  describe "#installed?" do
 
     it "calls the corresponding private lookup method" do
       lookup.tool = :dpkg
