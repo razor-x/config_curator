@@ -58,6 +58,7 @@ module ConfigCurator
     def install?
       return false unless allowed_host?
       return false unless packages_installed?
+      true
     end
 
     # Checks if the unit should be installed on this host.

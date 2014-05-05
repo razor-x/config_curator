@@ -16,6 +16,7 @@ module ConfigCurator
       fail InstallFailed, "No source file specified." if source_path.nil?
       fail InstallFailed, "No destination specified." if link_path.nil?
       fail InstallFailed, "Source file does not exist." unless File.exists? source_path
+      true
     end
 
     # Full path to source file.
