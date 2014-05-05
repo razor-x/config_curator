@@ -4,6 +4,7 @@ module ConfigCurator
 
   class PackageLookup
 
+    # Error when a package lookup cannot be completed.
     class LookupFailed < RuntimeError; end
 
     # Default list of supported package tools.
