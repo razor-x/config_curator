@@ -2,10 +2,14 @@ module ConfigCurator
 
   class Component < Unit
 
+    attr_accessor :mode, :owner, :group
+
     # @see Unit#install
     def install
       super
       install_component
+      set_mode
+      set_owner
     end
 
     # @see Unit#install?
@@ -23,7 +27,6 @@ module ConfigCurator
     # Any files in the install directory not in the source directory are removed.
     # Use rsync if available.
     def install_component
-
       if command? 'rsync'
         FileUtils.mkdir_p destination_path
         system 'rsync', '-rt', '--del', "#{source_path}/", destination_path
@@ -32,6 +35,16 @@ module ConfigCurator
         FileUtils.mkdir_p destination_path
         FileUtils.cp_r "#{source_path}/.", destination_path
       end
+    end
+
+    # Recursively set file mode.
+    # @todo
+    def set_mode
+    end
+
+    # Recursively set file owner and group.
+    # @todo
+    def set_owner
     end
   end
 

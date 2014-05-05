@@ -9,8 +9,10 @@ describe ConfigCurator::Component do
     it "installs the component" do
       allow(Dir).to receive(:exists?).and_return(true)
       component.source = 'file'
-      component.destination = 'link'
+      component.destination = 'install_path'
       expect(component).to receive(:install_component)
+      expect(component).to receive(:set_mode)
+      expect(component).to receive(:set_owner)
       component.install
     end
   end
