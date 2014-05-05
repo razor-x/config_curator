@@ -43,4 +43,79 @@ describe ConfigCurator::Unit do
       expect(unit.packages).to eq []
     end
   end
+
+  describe ".package_lookup" do
+
+    it "returns a PackageLookup object" do
+      expect(unit.package_lookup).to be_a ConfigCurator::PackageLookup
+    end
+
+    it "sets the correct package tool" do
+      unit.options[:package_tool] = :pkg_tool
+      expect(unit.package_lookup.tool).to eq :pkg_tool
+    end
+  end
+
+  describe "install" do
+
+    it "checks if unit should be installed" do
+      expect(unit).to receive(:install?)
+      unit.install
+    end
+  end
+
+  describe "install?" do
+
+    it "checks if host is allowed" do
+      expect(unit).to receive(:allowed_host?)
+      unit.install?
+    end
+
+    it "checks if package requirements are met" do
+      expect(unit).to receive(:packages_installed?)
+      unit.install?
+    end
+  end
+
+  describe ".allowed_host?" do
+
+    it "allows any host when no hosts are given" do
+      unit.hosts = []
+      expect(unit.allowed_host?).to eq true
+    end
+
+    it "allows host when host is listed" do
+      allow(unit).to receive(:hostname).and_return('test_hostname')
+      unit.hosts = %w(some_host test_hostname)
+      expect(unit.allowed_host?).to eq true
+    end
+
+    it "does not allow unlisted host" do
+      allow(unit).to receive(:hostname).and_return('bad_test_hostname')
+      unit.hosts = %w(some_host test_hostname)
+      expect(unit.allowed_host?).to eq false
+    end
+  end
+
+  describe "packages_installed?" do
+
+    it "meets package requirements when no packages listed" do
+      unit.packages = []
+      expect(unit.packages_installed?).to eq true
+    end
+
+    it "meets package requirements if no missing packages" do
+      allow(unit).to receive(:pkg_exists?).with('good_pkg_1').and_return(true)
+      allow(unit).to receive(:pkg_exists?).with('good_pkg_2').and_return(true)
+      unit.packages = %w(good_pkg_1 good_pkg_2)
+      expect(unit.packages_installed?).to eq true
+    end
+
+    it "does not meet package requirements when missing packages" do
+      allow(unit).to receive(:pkg_exists?).with('good_pkg').and_return(true)
+      allow(unit).to receive(:pkg_exists?).with('bad_pkg').and_return(false)
+      unit.packages = %w(good_pkg bad_pkg)
+      expect(unit.packages_installed?).to eq false
+    end
+  end
 end

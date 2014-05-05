@@ -39,6 +39,48 @@ module ConfigCurator
     def packages
       @packages ||= []
     end
+
+    # A {PackageLookup} object for this unit.
+    def package_lookup
+      @package_lookup ||= ConfigCurator::PackageLookup.new tool: options[:package_tool]
+    end
+
+    # Install the unit.
+    def install
+      return unless install?
+    end
+
+    # Checks if the unit should be installed.
+    # @return [Boolean] if the unit should be installed
+    def install?
+      return false unless allowed_host?
+      return false unless packages_installed?
+    end
+
+    # Checks if the unit should be installed on this host.
+    # @return [Boolean] if the hostname is in {#hosts}
+    def allowed_host?
+      return true if hosts.empty?
+      hosts.include? hostname
+    end
+
+    # Checks if the packages required for this unit are installed.
+    # @return [Boolean] if the packages in {#packages} are installed
+    def packages_installed?
+      packages.map(&method(:pkg_exists?)).delete_if{ |e| e }.empty?
+    end
+
+    private
+
+    # @return [String] the machine hostname
+    def hostname
+      Socket.gethostname
+    end
+
+    # @return [Boolean] if the package exists on the system
+    def pkg_exists? pkg
+      package_lookup.installed? pkg
+    end
   end
 
 end
