@@ -1,6 +1,6 @@
 module ConfigCurator
 
-  class File < Unit
+  class ConfigFile < Unit
   end
 
 end
