@@ -1,3 +1,5 @@
+require 'socket'
+
 module ConfigCurator
 
   class Unit
@@ -8,6 +10,9 @@ module ConfigCurator
     DEFAULT_OPTIONS = {
       # Unit installed relative to this path.
       root: Dir.home,
+
+      # Package tool to use. See #package_lookup.
+      package_tool: nil,
     }
 
     def initialize options: {}
