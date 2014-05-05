@@ -10,7 +10,7 @@ describe ConfigCurator::Symlink do
       allow(File).to receive(:exists?).and_return(true)
       symlink.source = 'file'
       symlink.destination = 'link'
-      expect(symlink).to receive(:symlink)
+      expect(symlink).to receive(:install_symlink)
       symlink.install
     end
   end
