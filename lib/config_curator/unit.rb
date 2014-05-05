@@ -7,7 +7,7 @@ module ConfigCurator
     # Error if the unit will fail to install.
     class InstallFailed < RuntimeError; end
 
-    attr_accessor :hosts, :packages
+    attr_accessor :source, :destination, :hosts, :packages
 
     # Default {#options}.
     DEFAULT_OPTIONS = {
@@ -28,6 +28,18 @@ module ConfigCurator
     def options options = {}
       @options ||= DEFAULT_OPTIONS
       @options = @options.merge options
+    end
+
+    # Full path to source.
+    # @return [String] expanded path to source
+    def source_path
+      File.expand_path source unless source.nil?
+    end
+
+    # Full path to destination.
+    # @return [String] expanded path to destination
+    def destination_path
+      File.expand_path File.join(options[:root], destination) unless destination.nil?
     end
 
     # Unit will be installed on these hosts.

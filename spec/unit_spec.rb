@@ -30,6 +30,31 @@ describe ConfigCurator::Unit do
     end
   end
 
+  describe "#source_path" do
+
+    it "returns nil if no source given" do
+      expect(unit.source_path).to eq nil
+    end
+
+    it "expands the path" do
+      unit.source = 'path/../src_name'
+      expect(unit.source_path).to eq File.expand_path('path/../src_name')
+    end
+  end
+
+  describe "#destination_path" do
+
+    it "returns nil if no destination given" do
+      expect(unit.destination_path).to eq nil
+    end
+
+    it "expands the path" do
+      unit.destination = 'path/../dest_name'
+      unit.options[:root] = '/tmp'
+      expect(unit.destination_path).to eq '/tmp/dest_name'
+    end
+  end
+
   describe "#hosts" do
 
     it "is empty by default" do
