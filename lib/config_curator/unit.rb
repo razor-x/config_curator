@@ -1,3 +1,4 @@
+require 'logger'
 require 'socket'
 
 module ConfigCurator
@@ -7,7 +8,7 @@ module ConfigCurator
     # Error if the unit will fail to install.
     class InstallFailed < RuntimeError; end
 
-    attr_accessor :source, :destination, :hosts, :packages
+    attr_accessor :logger, :source, :destination, :hosts, :packages
 
     # Default {#options}.
     DEFAULT_OPTIONS = {
@@ -18,8 +19,9 @@ module ConfigCurator
       package_tool: nil,
     }
 
-    def initialize options: {}
+    def initialize options: {}, logger: nil
       self.options options
+      self.logger = logger unless logger.nil?
     end
 
     # Uses {DEFAULT_OPTIONS} as initial value.
@@ -28,6 +30,14 @@ module ConfigCurator
     def options options = {}
       @options ||= DEFAULT_OPTIONS
       @options = @options.merge options
+    end
+
+    # Logger instance to use.
+    # @return [Logger] logger instance
+    def logger
+      @logger ||= Logger.new($stdout).tap do |log|
+        log.progname = self.class.name
+      end
     end
 
     # Full path to source.

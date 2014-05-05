@@ -6,6 +6,12 @@ describe ConfigCurator::Unit do
 
   describe ".new" do
 
+    it "sets the logger" do
+      logger = Logger.new(STDOUT)
+      unit = ConfigCurator::Unit.new logger: logger
+      expect(unit.logger).to be logger
+    end
+
     it "sets default options" do
       expect(unit.options).to eq ConfigCurator::Unit::DEFAULT_OPTIONS
     end
@@ -13,6 +19,13 @@ describe ConfigCurator::Unit do
     it "merges default options" do
       unit = ConfigCurator::Unit.new options: {root: '/home/user'}
       expect(unit.options).to eq ConfigCurator::Unit::DEFAULT_OPTIONS.merge(root: '/home/user')
+    end
+  end
+
+  describe "#logger" do
+
+    it "should make a new logger" do
+      expect(unit.logger).to be_a Logger
     end
   end
 
