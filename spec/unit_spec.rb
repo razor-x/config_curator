@@ -71,14 +71,16 @@ describe ConfigCurator::Unit do
   describe "#hosts" do
 
     it "is empty by default" do
-      expect(unit.hosts).to eq []
+      expect(unit.hosts).to be_a Array
+      expect(unit.hosts).to be_empty
     end
   end
 
   describe "#packages" do
 
     it "is empty by default" do
-      expect(unit.packages).to eq []
+      expect(unit.packages).to be_a Array
+      expect(unit.packages).to be_empty
     end
   end
 
