@@ -29,8 +29,7 @@ module ConfigCurator
 
       tools.each do |cmd|
         if command? cmd
-          @tool = cmd
-          return @tool
+          return @tool = cmd
         end
       end
       @tool
