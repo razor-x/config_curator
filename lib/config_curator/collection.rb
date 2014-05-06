@@ -39,6 +39,23 @@ module ConfigCurator
       self.manifest = YAML.load_file file
     end
 
+    # Unit objects defined by the manifest and organized by type.
+    # @return [Hash] keys are pluralized unit types from {UNIT_TYPES}
+    def units
+      @units ||= {}.tap do |u|
+        UNIT_TYPES.each do |type|
+          k = "#{type}s".to_sym
+          u[k] = []
+
+          if manifest
+            manifest[k].each do |v|
+              u[k] << create_unit(type, attributes: v)
+            end unless manifest[k].nil?
+          end
+        end
+      end
+    end
+
     # Creates a new unit object for the collection.
     # @param type [Symbol] a unit type in {UNIT_TYPES}
     # @param attributes [Hash] attributes for the unit from {UNIT_ATTRIBUTESS}

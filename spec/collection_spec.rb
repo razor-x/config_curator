@@ -85,8 +85,8 @@ describe ConfigCurator::Collection do
         YAML.load <<-EOF
           :root: /tmp
           :defaults:
-            :fmode: 0640
-            :dmode: 0750
+            :fmode: '0640'
+            :dmode: '0750'
             :owner: username
             :group: groupname
         EOF
@@ -107,6 +107,82 @@ describe ConfigCurator::Collection do
       it "sets attribute defaults from the manifest" do
         expect(unit.owner).to eq 'username'
         expect(unit.group).to eq 'groupname'
+      end
+    end
+  end
+
+  describe "#units" do
+
+    let(:types) do
+      types = ConfigCurator::Collection::UNIT_TYPES
+      types.map { |t| "#{t}s".to_sym }
+    end
+
+    context "no manifest" do
+
+      it "has a key for each supported unit type" do
+        types.each do |type|
+          expect(collection.units.key? type).to be true
+        end
+      end
+
+      it "sets each entry empty" do
+        types.each do |type|
+          expect(collection.units[type]).to be_a Array
+          expect(collection.units[type]).to be_empty
+        end
+      end
+    end
+
+    context "with manifest" do
+
+      let(:manifest) do
+        YAML.load <<-EOF
+          :defaults:
+            :dmode: '0700'
+          :components:
+            - :src: components/component_1
+              :dst: inst/component_1
+              :fmode: '0600'
+            - :src: components/component_2
+              :dst: inst/component_2
+          :config_files:
+            - :src: conf_file
+        EOF
+      end
+
+      before(:each) { collection.manifest = manifest }
+
+      it "has a key for each supported unit type" do
+        types.each do |type|
+          expect(collection.units.key? type).to be true
+        end
+      end
+
+      it "sets entries for missing unit types empty" do
+        %i(units symlinks).each do |type|
+          expect(collection.units[type]).to be_empty
+        end
+      end
+
+      it "contains units" do
+        expect(collection.units[:components]).to_not be_empty
+        collection.units[:components].each do |unit|
+          expect(unit).to be_a ConfigCurator::Component
+        end
+
+        expect(collection.units[:config_files]).to_not be_empty
+        collection.units[:config_files].each do |unit|
+          expect(unit).to be_a ConfigCurator::ConfigFile
+        end
+      end
+
+      it "creates units with correct attributes" do
+        component = collection.units[:components].first
+        expect(component.source).to eq 'components/component_1'
+        expect(component.destination).to eq 'inst/component_1'
+        expect(component.fmode).to eq '0600'
+        expect(component.dmode).to eq '0700'
       end
     end
   end
