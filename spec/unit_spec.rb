@@ -96,7 +96,7 @@ describe ConfigCurator::Unit do
     end
   end
 
-  describe "install" do
+  describe "#install" do
 
     it "checks if unit should be installed" do
       expect(unit).to receive(:install?)
@@ -104,7 +104,7 @@ describe ConfigCurator::Unit do
     end
   end
 
-  describe "install?" do
+  describe "#install?" do
 
     it "checks if host is allowed" do
       expect(unit).to receive(:allowed_host?)
@@ -137,7 +137,7 @@ describe ConfigCurator::Unit do
     end
   end
 
-  describe "packages_installed?" do
+  describe "#packages_installed?" do
 
     it "meets package requirements when no packages listed" do
       unit.packages = []
