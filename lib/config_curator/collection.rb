@@ -56,6 +56,32 @@ module ConfigCurator
       end
     end
 
+    # Installs all units from the manifest.
+    # @return [Boolean] if units were installed
+    # @todo Log errors.
+    def install
+      return false unless install?
+
+      UNIT_TYPES.each { |t| units[t.to_s.pluralize.to_sym].map &:install }
+
+      rescue ConfigCurator::Unit::InstallFailed
+        false
+      else
+        true
+    end
+
+    # Checks all units in the manifest for any detectable install issues.
+    # @return [Boolean] if units can be installed
+    # @todo Log errors.
+    def install?
+      UNIT_TYPES.each { |t| units[t.to_s.pluralize.to_sym].map &:install? }
+
+      rescue ConfigCurator::Unit::InstallFailed
+        false
+      else
+        true
+    end
+
     # Creates a new unit object for the collection.
     # @param type [Symbol] a unit type in {UNIT_TYPES}
     # @param attributes [Hash] attributes for the unit from {UNIT_ATTRIBUTESS}

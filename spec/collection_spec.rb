@@ -185,4 +185,79 @@ describe ConfigCurator::Collection do
       end
     end
   end
+
+  describe "#install" do
+
+    let(:manifest) do
+      YAML.load <<-EOF
+        :components:
+          - :src: components/component_1
+            :dst: inst/component_1
+          - :src: components/component_2
+            :dst: inst/component_2
+        :config_files:
+          - :src: conf_file
+      EOF
+    end
+
+    before(:each) { collection.manifest = manifest }
+
+    let(:units) { collection.units }
+
+    it "calls #install on each unit when #install? is true" do
+      allow(collection).to receive(:install?).and_return(true)
+      expect(units[:components][0]).to receive(:install)
+      expect(units[:components][1]).to receive(:install)
+      expect(units[:config_files][0]).to receive(:install)
+      expect(collection.install).to be true
+    end
+
+    it "returns false when #install? is false" do
+      allow(collection).to receive(:install?).and_return(false)
+      expect(units[:components][0]).to_not receive(:install)
+      expect(units[:components][1]).to_not receive(:install)
+      expect(units[:config_files][0]).to_not receive(:install)
+      expect(collection.install).to be false
+    end
+  end
+
+  describe "#install?" do
+
+    let(:manifest) do
+      YAML.load <<-EOF
+        :components:
+          - :src: components/component_1
+            :dst: inst/component_1
+          - :src: components/component_2
+            :dst: inst/component_2
+        :config_files:
+          - :src: conf_file
+      EOF
+    end
+
+    before(:each) { collection.manifest = manifest }
+
+    let(:units) { collection.units }
+
+    context "when no errors" do
+
+      it "calls #install? on each unit and returns true" do
+        expect(units[:components][0]).to receive(:install?)
+        expect(units[:components][1]).to receive(:install?)
+        expect(units[:config_files][0]).to receive(:install?)
+        expect(collection.install?).to be true
+      end
+    end
+
+    context "when install error" do
+
+      it "calls #install? on each unit and returns false" do
+        allow(units[:components][0]).to receive(:install?)
+        .and_raise(ConfigCurator::Unit::InstallFailed)
+        allow(units[:components][1]).to receive(:install?)
+        allow(units[:config_files][0]).to receive(:install?)
+        expect(collection.install?).to be false
+      end
+    end
+  end
 end
