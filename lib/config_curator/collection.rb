@@ -44,7 +44,7 @@ module ConfigCurator
     def units
       @units ||= {}.tap do |u|
         UNIT_TYPES.each do |type|
-          k = "#{type}s".to_sym
+          k = type.to_s.pluralize.to_sym
           u[k] = []
 
           if manifest
