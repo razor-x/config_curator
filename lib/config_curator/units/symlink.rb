@@ -19,7 +19,7 @@ module ConfigCurator
 
     private
 
-    # Recursively create the necessary directories and make the symlink.
+    # Recursively creates the necessary directories and make the symlink.
     def install_symlink
       FileUtils.mkdir_p File.dirname(destination_path)
       FileUtils.symlink source_path, destination_path, force: true

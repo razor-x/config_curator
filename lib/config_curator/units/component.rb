@@ -23,7 +23,7 @@ module ConfigCurator
 
     private
 
-    # Recursively create the necessary directories and install the component.
+    # Recursively creates the necessary directories and install the component.
     # Any files in the install directory not in the source directory are removed.
     # Use rsync if available.
     def install_component
@@ -37,12 +37,12 @@ module ConfigCurator
       end
     end
 
-    # Recursively set file mode.
+    # Recursively sets file mode.
     # @todo
     def set_mode
     end
 
-    # Recursively set file owner and group.
+    # Recursively sets file owner and group.
     # @todo
     def set_owner
     end

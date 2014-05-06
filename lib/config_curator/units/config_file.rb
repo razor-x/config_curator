@@ -28,18 +28,18 @@ module ConfigCurator
 
     private
 
-    # Recursively create the necessary directories and install the file.
+    # Recursively creates the necessary directories and install the file.
     def install_file
       FileUtils.mkdir_p File.dirname(destination_path)
       FileUtils.copy source_path, destination_path
     end
 
-    # Set file mode.
+    # Sets file mode.
     def set_mode
       FileUtils.chmod fmode, destination_path unless fmode.nil?
     end
 
-    # Set file owner and group.
+    # Sets file owner and group.
     # @todo
     def set_owner
     end

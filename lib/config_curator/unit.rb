@@ -70,7 +70,7 @@ module ConfigCurator
       @package_lookup ||= ConfigCurator::PackageLookup.new tool: options[:package_tool]
     end
 
-    # Install the unit.
+    # Installs the unit.
     def install
       return unless install?
     end

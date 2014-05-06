@@ -17,7 +17,7 @@ module ConfigCurator
       end
     end
 
-    # Load the manifest from file.
+    # Loads the manifest from file.
     # @param file [Hash] the yaml file to load
     # @return [Hash] the loaded manifest
     def load_manifest file
