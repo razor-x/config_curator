@@ -25,36 +25,88 @@ describe ConfigCurator::Collection do
     end
   end
 
-  describe "methods that use the manifest" do
+  describe "#load_manifest" do
 
-    let(:manifest) do
-      YAML.load <<-EOF
-        :options:
-          :log_level: :info
-          :root: /tmp
-        :defaults:
-          :fmode: 0640
-          :dmode: 0750
-          :user: username
-          :group: groupname
-        :components:
-          - :src: components/component
-            :dst: inst/component
-        :files:
-          - :src: conf_file
-        :symlinks:
-          - :src: src/file
-            :dst: path/to/link
-      EOF
+    let(:manifest) { {root: 'tmp'} }
+
+    it "loads the manifest" do
+      path = 'path/to/manifest'
+      allow(YAML).to receive(:load_file).with(path).and_return(manifest)
+      expect(collection.load_manifest path).to eq manifest
+      expect(collection.manifest).to eq manifest
+    end
+  end
+
+  describe "#create_unit" do
+
+    subject(:unit) { collection.create_unit :unit }
+
+    it "makes a new unit" do
+      expect(unit).to be_a ConfigCurator::Unit
     end
 
-    describe "#load_manifest" do
+    it "set the unit's logger" do
+      expect(unit.logger).to be collection.logger
+    end
 
-      it "loads the manifest" do
-        path = 'path/to/manifest'
-        allow(YAML).to receive(:load_file).with(path).and_return(manifest)
-        expect(collection.load_manifest path).to eq manifest
-        expect(collection.manifest).to eq manifest
+    context "with basic attributes" do
+
+      let(:attributes) { {src: 'src', dst: 'dest'} }
+      subject(:unit) { collection.create_unit :unit, attributes: attributes }
+
+      it "sets the source" do
+        expect(unit.source).to eq 'src'
+      end
+
+      it "sets the destination" do
+        expect(unit.destination).to eq 'dest'
+      end
+    end
+
+    context "with unit specific attributes" do
+
+      let(:attributes) { {src: 'src', dst: 'dest', fmode: '0600', owner: 'username'} }
+      subject(:unit) { collection.create_unit :component, attributes: attributes }
+
+      it "sets the generic attributes" do
+        expect(unit.destination).to eq 'dest'
+        expect(unit.source).to eq 'src'
+      end
+
+      it "sets the unit specific attributes" do
+        expect(unit.fmode).to eq '0600'
+        expect(unit.owner).to eq 'username'
+      end
+    end
+
+    context "with manifest" do
+
+      let(:manifest) do
+        YAML.load <<-EOF
+          :root: /tmp
+          :defaults:
+            :fmode: 0640
+            :dmode: 0750
+            :owner: username
+            :group: groupname
+        EOF
+      end
+      let(:attributes) { {src: 'src', dst: 'dest', dmode: '0700'} }
+      subject(:unit) { collection.create_unit :component, attributes: attributes }
+
+      before(:each) { collection.manifest = manifest }
+
+      it "sets the unit's root path" do
+        expect(unit.options[:root]).to eq manifest[:root]
+      end
+
+      it "sets the unit specific attributes" do
+        expect(unit.dmode).to eq '0700'
+      end
+
+      it "sets attribute defaults from the manifest" do
+        expect(unit.owner).to eq 'username'
+        expect(unit.group).to eq 'groupname'
       end
     end
   end

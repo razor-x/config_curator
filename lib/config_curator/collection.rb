@@ -1,8 +1,23 @@
+require 'active_support/core_ext/string'
+
 module ConfigCurator
 
   class Collection
 
-    attr_accessor :logger, :manifest
+    # Supported unit types.
+    UNIT_TYPES = %i(unit component config_file symlink)
+
+    # The possible attributes specific to each unit type.
+    # This should not include generic attributes
+    # such as {Unit#source} and {Unit#destination}.
+    UNIT_ATTRIBUTESS = {
+      unit: %i(),
+      component: %i(fmode dmode owner group),
+      config_file: %i(fmode owner group),
+      symlink: %i(),
+    }
+
+    attr_accessor :logger, :manifest, :units
 
     def initialize manifest_path: nil, logger: nil
       self.logger = logger unless logger.nil?
@@ -22,6 +37,37 @@ module ConfigCurator
     # @return [Hash] the loaded manifest
     def load_manifest file
       self.manifest = YAML.load_file file
+    end
+
+    # Creates a new unit object for the collection.
+    # @param type [Symbol] a unit type in {UNIT_TYPES}
+    # @param attributes [Hash] attributes for the unit from {UNIT_ATTRIBUTESS}
+    # @return [ConfigCurator::Unit] the unit object of the appropriate subclass
+    def create_unit type, attributes: {}
+      options = {}
+      %i(root).each do |k|
+        options[k] = manifest[k] unless manifest[k].nil?
+      end if manifest
+
+      "ConfigCurator::#{type.to_s.camelize}".constantize
+      .new(options: options, logger: logger).tap do |unit|
+        {src: :source, dst: :destination}.each do |k, v|
+          unit.send "#{v}=".to_sym, attributes[k] unless attributes[k].nil?
+        end
+
+        UNIT_ATTRIBUTESS[type].each do |v|
+          unit.send "#{v}=".to_sym, defaults[v] unless defaults[v].nil?
+          unit.send "#{v}=".to_sym, attributes[v] unless attributes[v].nil?
+        end
+      end
+    end
+
+    private
+
+    # Hash of any defaults given in the manifest.
+    def defaults
+      return {} unless manifest
+      manifest[:defaults].nil? ? {} : manifest[:defaults]
     end
   end
 
