@@ -145,7 +145,6 @@ describe ConfigCurator::Collection do
               :dst: inst/component_1
               :fmode: '0600'
             - :src: components/component_2
-              :dst: inst/component_2
           :config_files:
             - :src: conf_file
         EOF
