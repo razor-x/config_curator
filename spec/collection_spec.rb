@@ -45,7 +45,7 @@ describe ConfigCurator::Collection do
       expect(unit).to be_a ConfigCurator::Unit
     end
 
-    it "set the unit's logger" do
+    it "sets the unit's logger" do
       expect(unit.logger).to be collection.logger
     end
 
