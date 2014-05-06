@@ -2,7 +2,7 @@ module ConfigCurator
 
   class Component < Unit
 
-    attr_accessor :mode, :owner, :group
+    attr_accessor :fmode, :dmode, :owner, :group
 
     # @see Unit#install
     def install

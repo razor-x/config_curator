@@ -2,7 +2,7 @@ module ConfigCurator
 
   class ConfigFile < Unit
 
-    attr_accessor :mode, :owner, :group
+    attr_accessor :fmode, :owner, :group
 
     # @see Unit#destination
     def destination
@@ -36,7 +36,7 @@ module ConfigCurator
 
     # Set file mode.
     def set_mode
-      FileUtils.chmod mode, destination_path unless mode.nil?
+      FileUtils.chmod fmode, destination_path unless fmode.nil?
     end
 
     # Set file owner and group.
