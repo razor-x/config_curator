@@ -64,7 +64,7 @@ module ConfigCurator
 
       UNIT_TYPES.each { |t| units[t.to_s.pluralize.to_sym].map &:install }
 
-      rescue ConfigCurator::Unit::InstallFailed
+      rescue Unit::InstallFailed
         false
       else
         true
@@ -76,7 +76,7 @@ module ConfigCurator
     def install?
       UNIT_TYPES.each { |t| units[t.to_s.pluralize.to_sym].map &:install? }
 
-      rescue ConfigCurator::Unit::InstallFailed
+      rescue Unit::InstallFailed
         false
       else
         true
@@ -85,14 +85,14 @@ module ConfigCurator
     # Creates a new unit object for the collection.
     # @param type [Symbol] a unit type in {UNIT_TYPES}
     # @param attributes [Hash] attributes for the unit from {UNIT_ATTRIBUTESS}
-    # @return [ConfigCurator::Unit] the unit object of the appropriate subclass
+    # @return [Unit] the unit object of the appropriate subclass
     def create_unit type, attributes: {}
       options = {}
       %i(root).each do |k|
         options[k] = manifest[k] unless manifest[k].nil?
       end if manifest
 
-      "ConfigCurator::#{type.to_s.camelize}".constantize
+      "#{self.class.name.split('::').first}::#{type.to_s.camelize}".constantize
       .new(options: options, logger: logger).tap do |unit|
         {src: :source, dst: :destination}.each do |k, v|
           unit.send "#{v}=".to_sym, attributes[k] unless attributes[k].nil?

@@ -67,7 +67,7 @@ module ConfigCurator
 
     # A {PackageLookup} object for this unit.
     def package_lookup
-      @package_lookup ||= ConfigCurator::PackageLookup.new tool: options[:package_tool]
+      @package_lookup ||= PackageLookup.new tool: options[:package_tool]
     end
 
     # Installs the unit.
