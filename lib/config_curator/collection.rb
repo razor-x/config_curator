@@ -66,7 +66,8 @@ module ConfigCurator
 
       UNIT_TYPES.each { |t| units[t.to_s.pluralize.to_sym].map &:install }
 
-      rescue Unit::InstallFailed
+      rescue Unit::InstallFailed => e
+        logger.fatal "Install failed: #{e}"
         false
       else
         true
@@ -76,12 +77,22 @@ module ConfigCurator
     # @return [Boolean] if units can be installed
     # @todo Log errors.
     def install?
-      UNIT_TYPES.each { |t| units[t.to_s.pluralize.to_sym].map &:install? }
+      result = true
+      UNIT_TYPES.each do |t|
+        type_name = t.to_s.humanize capitalize: false
 
-      rescue Unit::InstallFailed
-        false
-      else
-        true
+        units[t.to_s.pluralize.to_sym].each do |unit|
+          begin
+            unit.install?
+            result = true if result
+            logger.info "Install #{type_name}: #{unit.source} → #{unit.destination}"
+          rescue Unit::InstallFailed => e
+            result = false
+            logger.warn "Install failed for #{type_name}: #{e}"
+          end
+        end
+      end
+      result
     end
 
     # Creates a new unit object for the collection.
