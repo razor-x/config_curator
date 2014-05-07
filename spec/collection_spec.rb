@@ -20,7 +20,7 @@ describe ConfigCurator::Collection do
 
   describe "#logger" do
 
-    it "should make a new logger" do
+    it "makes a new logger" do
       expect(collection.logger).to be_a Logger
     end
   end

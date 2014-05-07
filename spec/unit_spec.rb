@@ -24,7 +24,7 @@ describe ConfigCurator::Unit do
 
   describe "#logger" do
 
-    it "should make a new logger" do
+    it "makes a new logger" do
       expect(unit.logger).to be_a Logger
     end
   end
