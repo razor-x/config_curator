@@ -45,26 +45,32 @@ describe ConfigCurator::Unit do
 
   describe "#source_path" do
 
-    it "returns nil if no source given" do
-      expect(unit.source_path).to eq nil
-    end
-
     it "expands the path" do
       unit.source = 'path/../src_name'
       expect(unit.source_path).to eq File.expand_path('path/../src_name')
+    end
+
+    context "when no source given" do
+
+      it "returns nil" do
+        expect(unit.source_path).to eq nil
+      end
     end
   end
 
   describe "#destination_path" do
 
-    it "returns nil if no destination given" do
-      expect(unit.destination_path).to eq nil
-    end
-
     it "expands the path" do
       unit.destination = 'path/../dest_name'
       unit.options[:root] = '/tmp'
       expect(unit.destination_path).to eq '/tmp/dest_name'
+    end
+
+    context "when no destination given" do
+
+      it "returns nil" do
+        expect(unit.destination_path).to eq nil
+      end
     end
   end
 
@@ -119,43 +125,55 @@ describe ConfigCurator::Unit do
 
   describe "#allowed_host?" do
 
-    it "allows any host when no hosts are given" do
-      unit.hosts = []
-      expect(unit.allowed_host?).to eq true
+    context "when hosts are given" do
+
+      it "allows host if host is listed" do
+        allow(unit).to receive(:hostname).and_return('test_hostname')
+        unit.hosts = %w(some_host test_hostname)
+        expect(unit.allowed_host?).to eq true
+      end
+
+      it "does not allow unlisted host" do
+        allow(unit).to receive(:hostname).and_return('bad_test_hostname')
+        unit.hosts = %w(some_host test_hostname)
+        expect(unit.allowed_host?).to eq false
+      end
     end
 
-    it "allows host when host is listed" do
-      allow(unit).to receive(:hostname).and_return('test_hostname')
-      unit.hosts = %w(some_host test_hostname)
-      expect(unit.allowed_host?).to eq true
-    end
+    context "when no hosts are given" do
 
-    it "does not allow unlisted host" do
-      allow(unit).to receive(:hostname).and_return('bad_test_hostname')
-      unit.hosts = %w(some_host test_hostname)
-      expect(unit.allowed_host?).to eq false
+      it "allows any host" do
+        unit.hosts = []
+        expect(unit.allowed_host?).to eq true
+      end
     end
   end
 
   describe "#packages_installed?" do
 
-    it "meets package requirements when no packages listed" do
-      unit.packages = []
-      expect(unit.packages_installed?).to eq true
+    context "when packages listed" do
+
+      it "meets package requirements if no missing packages" do
+        allow(unit).to receive(:pkg_exists?).with('good_pkg_1').and_return(true)
+        allow(unit).to receive(:pkg_exists?).with('good_pkg_2').and_return(true)
+        unit.packages = %w(good_pkg_1 good_pkg_2)
+        expect(unit.packages_installed?).to eq true
+      end
+
+      it "does not meet package requirements if missing packages" do
+        allow(unit).to receive(:pkg_exists?).with('good_pkg').and_return(true)
+        allow(unit).to receive(:pkg_exists?).with('bad_pkg').and_return(false)
+        unit.packages = %w(good_pkg bad_pkg)
+        expect(unit.packages_installed?).to eq false
+      end
     end
 
-    it "meets package requirements if no missing packages" do
-      allow(unit).to receive(:pkg_exists?).with('good_pkg_1').and_return(true)
-      allow(unit).to receive(:pkg_exists?).with('good_pkg_2').and_return(true)
-      unit.packages = %w(good_pkg_1 good_pkg_2)
-      expect(unit.packages_installed?).to eq true
-    end
+    context "when no packages listed" do
 
-    it "does not meet package requirements when missing packages" do
-      allow(unit).to receive(:pkg_exists?).with('good_pkg').and_return(true)
-      allow(unit).to receive(:pkg_exists?).with('bad_pkg').and_return(false)
-      unit.packages = %w(good_pkg bad_pkg)
-      expect(unit.packages_installed?).to eq false
+      it "meets package requirements" do
+        unit.packages = []
+        expect(unit.packages_installed?).to eq true
+      end
     end
   end
 end

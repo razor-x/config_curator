@@ -27,13 +27,19 @@ describe ConfigCurator::ConfigFile do
 
   describe "#install?" do
 
-    it "fails when source not given" do
-      expect { config_file.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+    context "when source not given" do
+
+      it "fails" do
+        expect { config_file.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+      end
     end
 
-    it "fails when source does not exist" do
-      config_file.source = 'dir/that/does/not/exist'
-      expect { config_file.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+    context "when source does not exist" do
+
+      it "fails" do
+        config_file.source = 'dir/that/does/not/exist'
+        expect { config_file.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+      end
     end
   end
 end

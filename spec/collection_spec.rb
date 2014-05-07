@@ -204,20 +204,26 @@ describe ConfigCurator::Collection do
 
     let(:units) { collection.units }
 
-    it "calls #install on each unit when #install? is true" do
-      allow(collection).to receive(:install?).and_return(true)
-      expect(units[:components][0]).to receive(:install)
-      expect(units[:components][1]).to receive(:install)
-      expect(units[:config_files][0]).to receive(:install)
-      expect(collection.install).to be true
+    context "when #install? is true" do
+
+      it "calls #install on each unit and returns true" do
+        allow(collection).to receive(:install?).and_return(true)
+        expect(units[:components][0]).to receive(:install)
+        expect(units[:components][1]).to receive(:install)
+        expect(units[:config_files][0]).to receive(:install)
+        expect(collection.install).to be true
+      end
     end
 
-    it "returns false when #install? is false" do
-      allow(collection).to receive(:install?).and_return(false)
-      expect(units[:components][0]).to_not receive(:install)
-      expect(units[:components][1]).to_not receive(:install)
-      expect(units[:config_files][0]).to_not receive(:install)
-      expect(collection.install).to be false
+    context "when #install? is false" do
+
+      it "does not call #install on each unit and returns false" do
+        allow(collection).to receive(:install?).and_return(false)
+        expect(units[:components][0]).to_not receive(:install)
+        expect(units[:components][1]).to_not receive(:install)
+        expect(units[:config_files][0]).to_not receive(:install)
+        expect(collection.install).to be false
+      end
     end
   end
 

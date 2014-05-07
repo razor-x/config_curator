@@ -19,20 +19,29 @@ describe ConfigCurator::Component do
 
   describe "#install?" do
 
-    it "fails when source not given" do
-      component.destination = 'inst_path'
-      expect { component.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+    context "when source not given" do
+
+      it "fails" do
+        component.destination = 'inst_path'
+        expect { component.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+      end
     end
 
-    it "fails when destination not given" do
-      component.source = 'dir'
-      expect { component.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+    context "when destination not given" do
+
+      it "fails" do
+        component.source = 'dir'
+        expect { component.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+      end
     end
 
-    it "fails when source does not exist" do
-      component.destination = 'inst_path'
-      component.source = 'dir/that/does/not/exist'
-      expect { component.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+    context "when source does not exist" do
+
+      it "fails" do
+        component.destination = 'inst_path'
+        component.source = 'dir/that/does/not/exist'
+        expect { component.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+      end
     end
   end
 end

@@ -17,20 +17,29 @@ describe ConfigCurator::Symlink do
 
   describe "#install?" do
 
-    it "fails when source not given" do
-      symlink.destination = 'link_path'
-      expect { symlink.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+    context "when source not given" do
+
+      it "fails" do
+        symlink.destination = 'link_path'
+        expect { symlink.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+      end
     end
 
-    it "fails when destination not given" do
-      symlink.source = 'file'
-      expect { symlink.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+    context "when destination not given" do
+
+      it "fails" do
+        symlink.source = 'file'
+        expect { symlink.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+      end
     end
 
-    it "fails when source does not exist" do
-      symlink.destination = 'link_path'
-      symlink.source = 'path/that/does/not/exist'
-      expect { symlink.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+    context "when source does not exist" do
+
+      it "fails" do
+        symlink.destination = 'link_path'
+        symlink.source = 'path/that/does/not/exist'
+        expect { symlink.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
+      end
     end
   end
 end

@@ -21,15 +21,21 @@ describe ConfigCurator::PackageLookup do
 
   describe "#tool" do
 
-    it "returns the tool when set" do
-      lookup.tool = :pacman
-      expect(lookup.tool).to eq :pacman
+    context "when tool is set" do
+
+      it "returns the tool" do
+        lookup.tool = :pacman
+        expect(lookup.tool).to eq :pacman
+      end
     end
 
-    it "returns the first avaible tool when not set" do
-      allow(lookup).to receive(:command?).with(:dpkg).and_return(true)
-      lookup.tools = %i(dpkg pacman)
-      expect(lookup.tool).to eq :dpkg
+    context "when tool not set" do
+
+      it "returns the first avaible tool" do
+        allow(lookup).to receive(:command?).with(:dpkg).and_return(true)
+        lookup.tools = %i(dpkg pacman)
+        expect(lookup.tool).to eq :dpkg
+      end
     end
   end
 
@@ -41,10 +47,13 @@ describe ConfigCurator::PackageLookup do
       lookup.installed? 'rsync'
     end
 
-    it "fails when no package tool found" do
-      lookup.tools = %i(dpkg)
-      allow(lookup).to receive(:command?).with(:dpkg).and_return(false)
-      expect { lookup.installed? 'rsync' }.to raise_error ConfigCurator::PackageLookup::LookupFailed
+    context "when no package tool found" do
+
+      it "fails" do
+        lookup.tools = %i(dpkg)
+        allow(lookup).to receive(:command?).with(:dpkg).and_return(false)
+        expect { lookup.installed? 'rsync' }.to raise_error ConfigCurator::PackageLookup::LookupFailed
+      end
     end
   end
 end
