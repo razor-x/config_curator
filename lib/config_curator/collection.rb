@@ -1,4 +1,5 @@
 require 'active_support/core_ext/string'
+require 'yaml'
 
 module ConfigCurator
 
