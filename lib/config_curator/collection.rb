@@ -1,4 +1,5 @@
 require 'active_support/core_ext/string'
+require 'logger'
 require 'yaml'
 
 module ConfigCurator
