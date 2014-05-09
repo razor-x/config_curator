@@ -68,8 +68,9 @@ module ConfigCurator
 
         units[t.to_s.pluralize.to_sym].each do |unit|
           begin
-            unit.install
-            logger.info { "Installed #{type_name}: #{unit.source} ⇨ #{unit.destination_path}" }
+            if unit.install
+              logger.info { "Installed #{type_name}: #{unit.source} ⇨ #{unit.destination_path}" }
+            end
           rescue Unit::InstallFailed => e
             logger.fatal { "Halting install! Install attempt failed for #{type_name}: #{e}" }
             return nil
