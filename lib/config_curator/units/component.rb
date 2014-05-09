@@ -71,14 +71,6 @@ module ConfigCurator
         system *cmd
       end
     end
-
-    # Checks if command exists.
-    # @param command [String] command name to check
-    # @return [String, nil] full path to command or nil if not found
-    def command? command
-      MakeMakefile::Logging.quiet = true
-      MakeMakefile.find_executable command.to_s
-    end
   end
 
 end
