@@ -27,7 +27,7 @@ module ConfigCurator
     # Any files in the install directory not in the source directory are removed.
     # Use rsync if available.
     def install_component
-      if command? 'rsync'
+      if proc { `which rsync`; $?.success? }
         FileUtils.mkdir_p destination_path
         system 'rsync', '-rt', '--del', "#{source_path}/", destination_path
       else
