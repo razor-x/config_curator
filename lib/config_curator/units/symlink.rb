@@ -13,7 +13,6 @@ module ConfigCurator
       super
       fail InstallFailed, "No source file specified." if source_path.nil?
       fail InstallFailed, "No destination specified." if destination_path.nil?
-      fail InstallFailed, "Source file does not exist: #{source}" unless File.exists? source_path
       true
     end
 

@@ -32,14 +32,5 @@ describe ConfigCurator::Symlink do
         expect { symlink.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
       end
     end
-
-    context "when source does not exist" do
-
-      it "fails" do
-        symlink.destination = 'link_path'
-        symlink.source = 'path/that/does/not/exist'
-        expect { symlink.install? }.to raise_error ConfigCurator::Symlink::InstallFailed
-      end
-    end
   end
 end
