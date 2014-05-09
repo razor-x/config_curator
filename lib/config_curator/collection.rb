@@ -89,9 +89,9 @@ module ConfigCurator
 
         units[t.to_s.pluralize.to_sym].each do |unit|
           begin
-            unit.install?
-            result = true if result
-            logger.info { "Testing install for #{type_name}: #{unit.source} ⇨ #{unit.destination_path}" } unless quiet
+            if unit.install?
+              logger.info { "Testing install for #{type_name}: #{unit.source} ⇨ #{unit.destination_path}" }
+            end unless quiet
           rescue Unit::InstallFailed => e
             result = false
             logger.error { "Cannot install #{type_name}: #{e}" }
