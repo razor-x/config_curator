@@ -27,7 +27,7 @@ module ConfigCurator
         if result
           'completed without error.'
         elsif result.nil?
-          'failed'.
+          'failed.'
         else
           'failed. No changes were made.'
         end
