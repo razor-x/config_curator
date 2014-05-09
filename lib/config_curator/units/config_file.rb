@@ -40,7 +40,7 @@ module ConfigCurator
     # Recursively creates the necessary directories and install the file.
     def install_file
       FileUtils.mkdir_p File.dirname(destination_path)
-      FileUtils.copy source_path, destination_path
+      FileUtils.copy source_path, destination_path, preserve: true
     end
 
     # Sets file mode.
