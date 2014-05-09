@@ -24,10 +24,10 @@ module ConfigCurator
         if result
           'completed without error.'
         else
-         'failed.'
+          'failed.'
         end
 
-      logger.info msg
+      if result then logger.info msg else logger.error msg end
       return result
     end
 

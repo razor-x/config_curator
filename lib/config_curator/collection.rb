@@ -60,23 +60,28 @@ module ConfigCurator
 
     # Installs all units from the manifest.
     # @return [Boolean] if units were installed
-    # @todo Log errors.
     def install
-      return false unless install?
+      return false unless install? quiet: !(logger.level == Logger::DEBUG)
 
-      UNIT_TYPES.each { |t| units[t.to_s.pluralize.to_sym].map &:install }
+      UNIT_TYPES.each do |t|
+        type_name = t.to_s.humanize capitalize: false
 
-      rescue Unit::InstallFailed => e
-        logger.fatal "Install failed: #{e}"
-        false
-      else
-        true
+        units[t.to_s.pluralize.to_sym].each do |unit|
+          begin
+            unit.install
+            logger.info { "Installed #{type_name}: #{unit.source} ⇨ #{unit.destination_path}" }
+          rescue Unit::InstallFailed => e
+            logger.fatal { "Halting install! Install attempt failed for #{type_name}: #{e}" }
+          end
+        end
+      end
+      true
     end
 
     # Checks all units in the manifest for any detectable install issues.
+    # @param quiet [Boolean] suppress some {#logger} output
     # @return [Boolean] if units can be installed
-    # @todo Log errors.
-    def install?
+    def install? quiet: false
       result = true
       UNIT_TYPES.each do |t|
         type_name = t.to_s.humanize capitalize: false
@@ -85,10 +90,10 @@ module ConfigCurator
           begin
             unit.install?
             result = true if result
-            logger.info "Install #{type_name}: #{unit.source} → #{unit.destination}"
+            logger.info { "Testing install for #{type_name}: #{unit.source} ⇨ #{unit.destination_path}" } unless quiet
           rescue Unit::InstallFailed => e
             result = false
-            logger.warn "Install failed for #{type_name}: #{e}"
+            logger.error { "Cannot install #{type_name}: #{e}" }
           end
         end
       end
