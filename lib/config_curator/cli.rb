@@ -54,9 +54,9 @@ module ConfigCurator
             "#{severity} -- #{msg}\n"
           end
           log.level = \
-            elsif options[:debug]
+            if options[:debug]
               Logger::DEBUG
-            if options[:verbose]
+            elsif options[:verbose]
               Logger::INFO
             elsif options[:quiet]
               Logger::FATAL
