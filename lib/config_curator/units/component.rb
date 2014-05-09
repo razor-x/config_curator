@@ -1,3 +1,5 @@
+require 'mkmf'
+
 module ConfigCurator
 
   class Component < Unit
@@ -27,13 +29,15 @@ module ConfigCurator
     # Any files in the install directory not in the source directory are removed.
     # Use rsync if available.
     def install_component
-      if proc { `which rsync`; $?.success? }
+      if command? 'rsync'
         FileUtils.mkdir_p destination_path
-        system 'rsync', '-rt', '--del', "#{source_path}/", destination_path
+        cmd = [command?('rsync'), '-rt', '--del', "#{source_path}/", destination_path]
+        logger.debug { "Running command: #{cmd.join ' '}" }
+        system *cmd
       else
         FileUtils.remove_entry_secure destination_path
         FileUtils.mkdir_p destination_path
-        FileUtils.cp_r "#{source_path}/.", destination_path
+        FileUtils.cp_r "#{source_path}/.", destination_path, preserve: true
       end
     end
 
@@ -45,6 +49,14 @@ module ConfigCurator
     # Recursively sets file owner and group.
     # @todo
     def set_owner
+    end
+
+    # Checks if command exists.
+    # @param command [String] command name to check
+    # @return [String, nil] full path to command or nil if not found
+    def command? command
+      MakeMakefile::Logging.quiet = true
+      MakeMakefile.find_executable command.to_s
     end
   end
 
