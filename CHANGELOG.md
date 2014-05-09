@@ -2,4 +2,4 @@
 
 ## HEAD
 
-- Initial release.
+- Initial development release.
