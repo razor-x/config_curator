@@ -17,7 +17,7 @@ module ConfigCurator
       super
       fail InstallFailed, "No component source path specified." if source_path.nil?
       fail InstallFailed, "No component install path specified." if destination_path.nil?
-      fail InstallFailed, "Source path does not exist." unless Dir.exists? source_path
+      fail InstallFailed, "Source path does not exist: #{source}" unless Dir.exists? source_path
       true
     end
 

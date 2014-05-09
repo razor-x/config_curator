@@ -22,7 +22,7 @@ module ConfigCurator
     def install?
       super
       fail InstallFailed, "No file source path specified." if source_path.nil?
-      fail InstallFailed, "Source path does not exist." unless File.exists? source_path
+      fail InstallFailed, "Source path does not exist: #{source}" unless File.exists? source_path
       true
     end
 
