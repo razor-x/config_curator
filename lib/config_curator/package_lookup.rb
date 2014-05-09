@@ -61,14 +61,14 @@ module ConfigCurator
     def dpkg package
       cmd = command? 'dpkg'
       Open3.popen3 cmd, '-s', package do |_, _ , _, wait_thr|
-        wait_thr.value.to_i
+        wait_thr.value.to_i == 0
       end
     end
 
     def pacman package
       cmd = command? 'pacman'
       Open3.popen3 cmd, '-qQ', package do |_, _ , _, wait_thr|
-        wait_thr.value.to_i
+        wait_thr.value.to_i == 0
       end
     end
   end
