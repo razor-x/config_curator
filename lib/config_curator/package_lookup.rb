@@ -1,3 +1,4 @@
+require 'mkmf'
 require 'open3'
 
 module ConfigCurator
@@ -47,10 +48,9 @@ module ConfigCurator
 
     # Checks if command exists.
     # @param command [String] command name to check
-    # @return [Boolean] if command exists
+    # @return [String, nil] full path to command or nil if not found
     def command? command
-      `which #{command}`
-      $?.success?
+      MakeMakefile.find_executable
     end
 
     #
@@ -58,13 +58,15 @@ module ConfigCurator
     #
 
     def dpkg package
-      Open3.popen3 'dpkg', '-s', package do |_, _ , _, wait_thr|
+      cmd = command? 'dpkg'
+      Open3.popen3 cmd, '-s', package do |_, _ , _, wait_thr|
         wait_thr.value.to_i
       end
     end
 
     def pacman package
-      Open3.popen3 'pacman', '-qQ', package do |_, _ , _, wait_thr|
+      cmd = command? 'pacman'
+      Open3.popen3 cmd, '-qQ', package do |_, _ , _, wait_thr|
         wait_thr.value.to_i
       end
     end
