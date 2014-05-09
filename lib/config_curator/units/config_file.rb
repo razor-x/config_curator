@@ -49,8 +49,8 @@ module ConfigCurator
     end
 
     # Sets file owner and group.
-    # @todo
     def set_owner
+      FileUtils.chown owner, group, destination_path
     end
 
     private
