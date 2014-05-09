@@ -42,13 +42,31 @@ module ConfigCurator
     end
 
     # Recursively sets file mode.
-    # @todo
+    # @todo Make this more platform independent.
     def set_mode
+      chmod = command? 'chmod'
+      find = command? 'find'
+      if chmod && find
+        {fmode: 'f', dmode: 'd'}.each do |k, v|
+          next if self.send(k).nil?
+          cmd = [find,  destination_path, '-type', v, '-exec']
+          cmd.concat [chmod, self.send(k).to_s(8), '{}', '+']
+          logger.debug { "Running command: #{cmd.join ' '}" }
+          system *cmd
+        end
+      end
     end
 
     # Recursively sets file owner and group.
-    # @todo
+    # @todo Make this more platform independent.
     def set_owner
+      return unless owner || group
+      chown = command? 'chown'
+      if chown
+        cmd = [chown, '-R', "#{owner}:#{group}", destination_path]
+        logger.debug { "Running command: #{cmd.join ' '}" }
+        system *cmd
+      end
     end
 
     # Checks if command exists.
