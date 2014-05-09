@@ -4,6 +4,15 @@ module ConfigCurator
 
     attr_accessor :fmode, :owner, :group
 
+    # Will use files of the form `filename.hostname.ext` if found.
+    # @see Unit#source
+    def source
+      path = super
+      host_specific_file = search_for_host_specific_file path if path
+      if host_specific_file then return host_specific_file else return path end
+    end
+
+    # Use {#source} by default.
     # @see Unit#destination
     def destination
       super
@@ -42,6 +51,21 @@ module ConfigCurator
     # Sets file owner and group.
     # @todo
     def set_owner
+    end
+
+    private
+
+    # Will look for files with the naming pattern `filename.hostname.ext`.
+    # @param path [String] path to the non-host-specific file
+    def search_for_host_specific_file path
+      directory = File.dirname path
+      extension = File.extname path
+      basename = File.basename path.chomp(extension)
+      if Dir.exists? directory
+        Dir.entries(directory).grep(/^#{basename}.#{hostname.downcase}/).first
+      else
+        nil
+      end
     end
   end
 

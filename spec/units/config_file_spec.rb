@@ -12,6 +12,33 @@ describe ConfigCurator::ConfigFile do
     end
   end
 
+  describe "#source" do
+
+    context "when host-specific file not found" do
+
+      let(:source) { 'path/../src_name.ext' }
+
+      it "returns the source path" do
+        config_file.source = source
+        allow(config_file).to receive(:search_for_host_specific_file).with(source)
+        .and_return(nil)
+        expect(config_file.source).to eq source
+      end
+    end
+
+    context "when host-specific file found" do
+
+      let(:source) { 'path/../src_name.ext' }
+
+      it "returns the host-specific source path" do
+        config_file.source = source
+        allow(config_file).to receive(:search_for_host_specific_file).with(source)
+        .and_return('path/../src_name.hostname.ext')
+        expect(config_file.source).to eq 'path/../src_name.hostname.ext'
+      end
+    end
+  end
+
   describe "#install" do
 
     it "installs the config file" do
