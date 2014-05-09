@@ -13,10 +13,10 @@ module ConfigCurator
     # This should not include generic attributes
     # such as {Unit#source} and {Unit#destination}.
     UNIT_ATTRIBUTESS = {
-      unit: %i(),
-      component: %i(fmode dmode owner group),
-      config_file: %i(fmode owner group),
-      symlink: %i(),
+      unit: %i(hosts packages),
+      component: %i(hosts packages fmode dmode owner group),
+      config_file: %i(hosts packages fmode owner group),
+      symlink: %i(hosts packages),
     }
 
     attr_accessor :logger, :manifest, :units
