@@ -72,7 +72,8 @@ module ConfigCurator
 
     # Installs the unit.
     def install
-      return unless install?
+      return false unless install?
+      true
     end
 
     # Checks if the unit should be installed.

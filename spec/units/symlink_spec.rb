@@ -6,12 +6,22 @@ describe ConfigCurator::Symlink do
 
   describe "#install" do
 
-    it "makes a symbolic link" do
-      allow(File).to receive(:exists?).and_return(true)
-      symlink.source = 'file'
-      symlink.destination = 'link'
-      expect(symlink).to receive(:install_symlink)
-      symlink.install
+    context "when symbolic link should be installed" do
+
+      it "installs the symbolic link and returns true" do
+        expect(symlink).to receive(:install?).and_return true
+        expect(symlink).to receive(:install_symlink)
+        expect(symlink.install).to be true
+      end
+    end
+
+    context "when symbolic link should not be installed" do
+
+      it "does not install the symbolic link and returns false" do
+        expect(symlink).to receive(:install?).and_return false
+        expect(symlink).to_not receive(:install_symlink)
+        expect(symlink.install).to be false
+      end
     end
   end
 

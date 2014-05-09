@@ -4,13 +4,16 @@ module ConfigCurator
 
     # @see Unit#install
     def install
-      super
+      s = super
+      return s unless s
       install_symlink
+      true
     end
 
     # @see Unit#install?
     def install?
-      super
+      s = super
+      return s unless s
       fail InstallFailed, "No source file specified." if source_path.nil?
       fail InstallFailed, "No destination specified." if destination_path.nil?
       true

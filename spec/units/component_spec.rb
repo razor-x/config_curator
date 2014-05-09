@@ -6,14 +6,26 @@ describe ConfigCurator::Component do
 
   describe "#install" do
 
-    it "installs the component" do
-      allow(Dir).to receive(:exists?).and_return(true)
-      component.source = 'file'
-      component.destination = 'install_path'
-      expect(component).to receive(:install_component)
-      expect(component).to receive(:set_mode)
-      expect(component).to receive(:set_owner)
-      component.install
+    context "when component should be installed" do
+
+      it "installs the component and returns true" do
+        expect(component).to receive(:install?).and_return(true)
+        expect(component).to receive(:install_component)
+        expect(component).to receive(:set_mode)
+        expect(component).to receive(:set_owner)
+        expect(component.install).to be true
+      end
+    end
+
+    context "when component should not be installed" do
+
+      it "does not install the component and returns false" do
+        expect(component).to receive(:install?).and_return(false)
+        expect(component).to_not receive(:install_component)
+        expect(component).to_not receive(:set_mode)
+        expect(component).to_not receive(:set_owner)
+        expect(component.install).to be false
+      end
     end
   end
 

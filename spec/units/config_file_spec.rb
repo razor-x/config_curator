@@ -41,14 +41,26 @@ describe ConfigCurator::ConfigFile do
 
   describe "#install" do
 
-    it "installs the config file" do
-      allow(File).to receive(:exists?).and_return(true)
-      config_file.source = 'file'
-      config_file.destination = 'dest'
-      expect(config_file).to receive(:install_file)
-      expect(config_file).to receive(:set_mode)
-      expect(config_file).to receive(:set_owner)
-      config_file.install
+    context "when config file should be installed" do
+
+      it "installs the config file and returns true" do
+        expect(config_file).to receive(:install?).and_return(true)
+        expect(config_file).to receive(:install_file)
+        expect(config_file).to receive(:set_mode)
+        expect(config_file).to receive(:set_owner)
+        expect(config_file.install).to be true
+      end
+    end
+
+    context "when config file should not be installed" do
+
+      it "does not install the config file and returns false" do
+        expect(config_file).to receive(:install?).and_return(false)
+        expect(config_file).to_not receive(:install_file)
+        expect(config_file).to_not receive(:set_mode)
+        expect(config_file).to_not receive(:set_owner)
+        expect(config_file.install).to be false
+      end
     end
   end
 

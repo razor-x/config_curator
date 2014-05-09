@@ -8,15 +8,18 @@ module ConfigCurator
 
     # @see Unit#install
     def install
-      super
+      s = super
+      return s unless s
       install_component
       set_mode
       set_owner
+      true
     end
 
     # @see Unit#install?
     def install?
-      super
+      s = super
+      return s unless s
       fail InstallFailed, "No component source path specified." if source_path.nil?
       fail InstallFailed, "No component install path specified." if destination_path.nil?
       fail InstallFailed, "Source path does not exist: #{source}" unless Dir.exists? source_path

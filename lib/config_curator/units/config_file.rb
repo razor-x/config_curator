@@ -21,15 +21,18 @@ module ConfigCurator
 
     # @see Unit#install
     def install
-      super
+      s = super
+      return s unless s
       install_file
       set_mode
       set_owner
+      true
     end
 
     # @see Unit#install?
     def install?
-      super
+      s = super
+      return s unless s
       fail InstallFailed, "No file source path specified." if source_path.nil?
       fail InstallFailed, "Source path does not exist: #{source}" unless File.exists? source_path
       true

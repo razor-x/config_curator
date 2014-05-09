@@ -104,9 +104,20 @@ describe ConfigCurator::Unit do
 
   describe "#install" do
 
-    it "checks if unit should be installed" do
-      expect(unit).to receive(:install?)
-      unit.install
+    context "when unit should be installed" do
+
+      it "returns true" do
+        expect(unit).to receive(:install?).and_return(true)
+        expect(unit.install).to be true
+      end
+    end
+
+    context "when unit should not be installed" do
+
+      it "returns false" do
+        expect(unit).to receive(:install?).and_return(false)
+        expect(unit.install).to be false
+      end
     end
   end
 
