@@ -5,6 +5,9 @@ module ConfigCurator
 
   class CLI < Thor
 
+    class_option :verbose, type: :boolean, aliases: %i(v)
+    class_option :quiet, type: :boolean, aliases: %i(q)
+
     # Installs the collection.
     # @param manifest [String] path to the manifest file to use
     # @return [Boolean] value of {Collection#install} or {Collection#install?}
@@ -47,6 +50,14 @@ module ConfigCurator
           log.formatter = proc do |severity, _, _, msg|
             "#{severity} -- #{msg}\n"
           end
+          log.level = \
+            if options[:verbose]
+              Logger::INFO
+            elsif options[:quiet]
+              Logger::FATAL
+            else
+              Logger::WARN
+            end
         end
       end
     end
