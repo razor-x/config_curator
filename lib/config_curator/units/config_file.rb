@@ -62,7 +62,8 @@ module ConfigCurator
       extension = File.extname path
       basename = File.basename path.chomp(extension)
       if Dir.exists? directory
-        Dir.entries(directory).grep(/^#{basename}.#{hostname.downcase}/).first
+        file = Dir.entries(directory).grep(/^#{basename}.#{hostname.downcase}/).first
+        File.join directory, file unless file.nil?
       else
         nil
       end
