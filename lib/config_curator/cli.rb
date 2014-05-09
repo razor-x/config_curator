@@ -7,6 +7,7 @@ module ConfigCurator
 
     class_option :verbose, type: :boolean, aliases: %i(v)
     class_option :quiet, type: :boolean, aliases: %i(q)
+    class_option :debug, type: :boolean
 
     # Installs the collection.
     # @param manifest [String] path to the manifest file to use
@@ -53,6 +54,8 @@ module ConfigCurator
             "#{severity} -- #{msg}\n"
           end
           log.level = \
+            elsif options[:debug]
+              Logger::DEBUG
             if options[:verbose]
               Logger::INFO
             elsif options[:quiet]
