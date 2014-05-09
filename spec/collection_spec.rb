@@ -225,6 +225,17 @@ describe ConfigCurator::Collection do
         expect(collection.install).to be false
       end
     end
+
+    context "when component install fails" do
+
+      it "stops installing and returns nil" do
+        allow(collection).to receive(:install?).and_return(true)
+        expect(units[:components][0]).to receive(:install)
+        expect(units[:components][1]).to receive(:install).and_raise ConfigCurator::Unit::InstallFailed
+        expect(units[:config_files][0]).to_not receive(:install)
+        expect(collection.install).to be nil
+      end
+    end
   end
 
   describe "#install?" do

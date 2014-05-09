@@ -59,7 +59,7 @@ module ConfigCurator
     end
 
     # Installs all units from the manifest.
-    # @return [Boolean] if units were installed
+    # @return [Boolean, nil] if units were installed or nil when fails mid-install
     def install
       return false unless install? quiet: !(logger.level == Logger::DEBUG)
 
@@ -72,6 +72,7 @@ module ConfigCurator
             logger.info { "Installed #{type_name}: #{unit.source} ⇨ #{unit.destination_path}" }
           rescue Unit::InstallFailed => e
             logger.fatal { "Halting install! Install attempt failed for #{type_name}: #{e}" }
+            return nil
           end
         end
       end

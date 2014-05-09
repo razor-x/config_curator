@@ -26,8 +26,10 @@ module ConfigCurator
       msg = "Install #{'simulation ' if options[:dryrun]}" + \
         if result
           'completed without error.'
+        elsif result.nil?
+          'failed'.
         else
-          'failed.'
+          'failed. No changes were made.'
         end
 
       if result then logger.info msg else logger.error msg end
