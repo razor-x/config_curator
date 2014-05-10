@@ -3,6 +3,7 @@ require 'thor'
 
 module ConfigCurator
 
+  # Thor class for the `curate` command.
   class CLI < Thor
 
     default_task :install
