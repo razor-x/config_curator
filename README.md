@@ -60,6 +60,10 @@ $ git clone https://github.com/razor-x/config_curator.git
 
 ## Contributing
 
+Please submit and comment on bug reports and feature requests.
+
+To submit a patch:
+
 1. Fork it (https://github.com/razor-x/config_curator/fork).
 2. Create your feature branch (`git checkout -b my-new-feature`).
 3. Commit your changes (`git commit -am 'Add some feature'`).
