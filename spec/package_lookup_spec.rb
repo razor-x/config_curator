@@ -32,8 +32,8 @@ describe ConfigCurator::PackageLookup do
     context "when tool not set" do
 
       it "returns the first avaible tool" do
-        allow(lookup).to receive(:command?).with(:dpkg).and_return(true)
-        lookup.tools = %i(dpkg pacman)
+        lookup.tools = {dpkg: 'dpkg', pacman: 'pacman'}
+        allow(lookup).to receive(:command?).with('dpkg').and_return(true)
         expect(lookup.tool).to eq :dpkg
       end
     end
@@ -41,17 +41,43 @@ describe ConfigCurator::PackageLookup do
 
   describe "#installed?" do
 
-    it "calls the corresponding private lookup method" do
-      lookup.tool = :dpkg
-      expect(lookup).to receive(:dpkg).with('rsync')
-      lookup.installed? 'rsync'
+    context "when package is found" do
+
+      it "calls the corresponding private lookup method and returns true" do
+        lookup.tool = :dpkg
+        cmd = lookup.tools[:dpkg]
+        allow(lookup).to receive(:command?).with(cmd).and_return(cmd)
+        expect(lookup).to receive(:dpkg).with('rsync').and_return(true)
+        expect(lookup.installed? 'rsync').to be true
+      end
+    end
+
+    context "when package not found" do
+
+      it "calls the corresponding private lookup method and returns false" do
+        lookup.tool = :dpkg
+        cmd = lookup.tools[:dpkg]
+        allow(lookup).to receive(:command?).with(cmd).and_return(cmd)
+        expect(lookup).to receive(:dpkg).with('rsync').and_return(false)
+        expect(lookup.installed? 'rsync').to be false
+      end
     end
 
     context "when no package tool found" do
 
       it "fails" do
-        lookup.tools = %i(dpkg)
-        allow(lookup).to receive(:command?).with(:dpkg).and_return(false)
+        lookup.tools = {dpkg: 'dpkg'}
+        allow(lookup).to receive(:command?).with('dpkg').and_return(nil)
+        expect { lookup.installed? 'rsync' }.to raise_error ConfigCurator::PackageLookup::LookupFailed
+      end
+    end
+
+    context "when package tool not found" do
+
+      it "fails" do
+        lookup.tool = :dpkg
+        cmd = lookup.tools[:dpkg]
+        allow(lookup).to receive(:command?).with(cmd).and_return(nil)
         expect { lookup.installed? 'rsync' }.to raise_error ConfigCurator::PackageLookup::LookupFailed
       end
     end

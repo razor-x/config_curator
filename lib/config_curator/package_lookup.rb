@@ -16,7 +16,11 @@ module ConfigCurator
     class LookupFailed < RuntimeError; end
 
     # Default list of supported package tools.
-    TOOLS = %i(dpkg pacman)
+    # @see #tools
+    TOOLS = {
+      dpkg: 'dpkg',
+      pacman: 'pacman',
+    }
 
     attr_accessor :tool, :tools
 
@@ -25,7 +29,8 @@ module ConfigCurator
     end
 
     # Package tools that support package lookup ordered by preference.
-    # @return [Array] list of supported package tools
+    # Each key is an identifier and each value is the command to check for.
+    # @return [Hash] hash of supported package tools
     def tools
       @tools ||= TOOLS
     end
@@ -35,9 +40,9 @@ module ConfigCurator
     def tool
       return @tool if @tool
 
-      tools.each do |cmd|
-        if command? cmd
-          return @tool = cmd
+      tools.each do |k, v|
+        if command? v
+          return @tool = k
         end
       end
       @tool
@@ -48,6 +53,10 @@ module ConfigCurator
     # @return [Boolean] if package is installed
     def installed? package
       fail LookupFailed, 'No supported package tool found.' if tool.nil?
+
+      cmd = tools[tool]
+      fail LookupFailed, "Package tool '#{cmd}' not found." if command?(cmd).nil?
+
       send tool, package
     end
 
