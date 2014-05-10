@@ -84,6 +84,7 @@ describe ConfigCurator::Collection do
       let(:manifest) do
         YAML.load <<-EOF
           :root: /tmp
+          :package_tool: :pacman
           :defaults:
             :fmode: '0640'
             :dmode: '0750'
@@ -98,6 +99,10 @@ describe ConfigCurator::Collection do
 
       it "sets the unit's root path" do
         expect(unit.options[:root]).to eq manifest[:root]
+      end
+
+      it "sets the unit's package tool" do
+        expect(unit.options[:package_tool]).to eq manifest[:package_tool]
       end
 
       it "sets the unit specific attributes" do

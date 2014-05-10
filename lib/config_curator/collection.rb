@@ -111,7 +111,7 @@ module ConfigCurator
     # @return [Unit] the unit object of the appropriate subclass
     def create_unit type, attributes: {}
       options = {}
-      %i(root).each do |k|
+      %i(root package_tool).each do |k|
         options[k] = manifest[k] unless manifest[k].nil?
       end if manifest
 
