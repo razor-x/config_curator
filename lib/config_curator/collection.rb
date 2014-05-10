@@ -4,6 +4,9 @@ require 'yaml'
 
 module ConfigCurator
 
+  # Manages collections of units.
+  # @example Load a list of units and install them
+  #  Collection.new(manifest_path: 'manifest.yml').install
   class Collection
 
     # Supported unit types.
