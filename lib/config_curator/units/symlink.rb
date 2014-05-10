@@ -2,7 +2,7 @@ module ConfigCurator
 
   class Symlink < Unit
 
-    # @see Unit#install
+    # (see Unit#install)
     def install
       s = super
       return s unless s
@@ -10,7 +10,7 @@ module ConfigCurator
       true
     end
 
-    # @see Unit#install?
+    # (see Unit#install?)
     def install?
       s = super
       return s unless s

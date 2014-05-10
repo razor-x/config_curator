@@ -5,21 +5,21 @@ module ConfigCurator
     attr_accessor :fmode, :owner, :group
 
     # Will use files of the form `filename.hostname.ext` if found.
-    # @see Unit#source
+    # (see Unit#source)
     def source
       path = super
       host_specific_file = search_for_host_specific_file path if path
       if host_specific_file then return host_specific_file else return path end
     end
 
-    # Use {#source} by default.
-    # @see Unit#destination
+    # (see Unit#destination)
+    # @note Use {#source} by default.
     def destination
       super
       @destination ||= source
     end
 
-    # @see Unit#install
+    # (see Unit#install)
     def install
       s = super
       return s unless s
@@ -29,7 +29,7 @@ module ConfigCurator
       true
     end
 
-    # @see Unit#install?
+    # (see Unit#install?)
     def install?
       s = super
       return s unless s
