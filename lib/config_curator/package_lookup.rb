@@ -3,6 +3,13 @@ require 'open3'
 
 module ConfigCurator
 
+  # Lookup if a package is installed on the system.
+  # See {TOOLS} for supported package tools.
+  # If {#tool} is not explicitly set, it will try and choose one automatically.
+  # @example Lookup a package
+  #   PackageLookup.new.installed? 'ruby' #=> true
+  # @example Lookup a package using `pacman`
+  #   PackageLookup.new(tool: :pacman).installed? 'ruby' #=> true
   class PackageLookup
 
     # Error when a package lookup cannot be completed.
