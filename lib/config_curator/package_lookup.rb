@@ -20,6 +20,7 @@ module ConfigCurator
     TOOLS = {
       dpkg: 'dpkg',
       pacman: 'pacman',
+      pkgng: 'pkg',
     }
 
     attr_accessor :tool, :tools
@@ -85,6 +86,13 @@ module ConfigCurator
     def pacman package
       cmd = command? 'pacman'
       Open3.popen3 cmd, '-qQ', package do |_, _ , _, wait_thr|
+        wait_thr.value.to_i == 0
+      end
+    end
+
+    def pkgng package
+      cmd = command? 'pkg'
+      Open3.popen3 cmd, 'info', package do |_, _ , _, wait_thr|
         wait_thr.value.to_i == 0
       end
     end
