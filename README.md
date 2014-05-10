@@ -30,6 +30,7 @@ Or install it yourself as:
 ````bash
 $ gem install config_curator
 ````
+
 ## Documentation
 
 The primary documentation for Config Curator is this README and the YARD source documentation.
@@ -40,6 +41,12 @@ Documentation for the latest commits is hosted on
 [the RubyDoc.info project page](http://rubydoc.info/github/razor-x/config_curator/frames).
 
 ## Usage
+
+### Scripting
+
+Config Curator is fully scriptable for easy inclusion into other Ruby programs.
+The API is well documented for this purpose
+(see [Documentation](#documentation) above).
 
 ## Source Repository
 
