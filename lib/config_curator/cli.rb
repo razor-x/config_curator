@@ -5,6 +5,8 @@ module ConfigCurator
 
   class CLI < Thor
 
+    default_task :install
+
     class_option :verbose, type: :boolean, aliases: %i(v)
     class_option :quiet, type: :boolean, aliases: %i(q)
     class_option :debug, type: :boolean
