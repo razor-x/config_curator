@@ -2,6 +2,10 @@ require 'mkmf'
 
 module ConfigCurator
 
+  # A component is a folder that should be copied.
+  # The {#destination} will become a mirror of the {#source}.
+  # The contents of the {#destination_path} is
+  # completely replaced by the contents of the {#source_path}.
   class Component < Unit
 
     attr_accessor :fmode, :dmode, :owner, :group

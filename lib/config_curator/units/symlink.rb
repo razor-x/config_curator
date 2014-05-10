@@ -1,5 +1,8 @@
 module ConfigCurator
 
+  # A symlink is a symbolic link that should be created.
+  # The {#destination_path} will be a link
+  # that points to the {#source_path}.
   class Symlink < Unit
 
     # (see Unit#install)

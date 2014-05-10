@@ -3,6 +3,9 @@ require 'socket'
 
 module ConfigCurator
 
+  # A unit is the base class for a type of configuration
+  # that should be installed.
+  # All units must specify a {#source} and a {#destination}.
   class Unit
 
     # Error if the unit will fail to install.

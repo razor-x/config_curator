@@ -1,5 +1,6 @@
 module ConfigCurator
 
+  # A config file is a file that should be copied.
   class ConfigFile < Unit
 
     attr_accessor :fmode, :owner, :group
