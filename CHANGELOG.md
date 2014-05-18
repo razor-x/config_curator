@@ -1,6 +1,6 @@
 # Config Curator ChangeLog
 
-## HEAD
+## 0.1.0
 
 - PackageLookup#tools separates tool identifier and tool command.
 - PackageLookup#installed? checks for tool command before lookup.
