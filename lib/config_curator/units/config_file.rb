@@ -5,6 +5,8 @@ module ConfigCurator
 
     attr_accessor :fmode, :owner, :group
 
+    alias :super_source :source
+
     # Will use files of the form `filename.hostname.ext` if found.
     # (see Unit#source)
     def source
@@ -14,10 +16,10 @@ module ConfigCurator
     end
 
     # (see Unit#destination)
-    # @note Use {#source} by default.
+    # @note Use {Unit#source} by default.
     def destination
       super
-      @destination ||= source
+      @destination ||= super_source
     end
 
     # (see Unit#install)
