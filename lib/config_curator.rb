@@ -1,4 +1,5 @@
 require 'config_curator/version'
+require 'config_curator/utils'
 require 'config_curator/package_lookup'
 require 'config_curator/collection'
 require 'config_curator/cli'

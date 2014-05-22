@@ -12,6 +12,8 @@ module ConfigCurator
   #   PackageLookup.new(tool: :pacman).installed? 'ruby' #=> true
   class PackageLookup
 
+    include Utils
+
     # Error when a package lookup cannot be completed.
     class LookupFailed < RuntimeError; end
 
@@ -62,15 +64,6 @@ module ConfigCurator
     end
 
     private
-
-    # Checks if command exists.
-    # @param command [String] command name to check
-    # @return [String, nil] full path to command or nil if not found
-    def command? command
-      MakeMakefile::Logging.instance_variable_set :@logfile, File::NULL
-      MakeMakefile::Logging.quiet = true
-      MakeMakefile.find_executable command.to_s
-    end
 
     #
     # Tool specific package lookup methods below.
