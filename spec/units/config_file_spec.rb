@@ -6,9 +6,21 @@ describe ConfigCurator::ConfigFile do
 
   describe "#destination" do
 
+    let(:source) { 'path/../src_name.ext' }
+
     it "uses the source path to set the destination" do
-      config_file.source = 'path/to/file'
-      expect(config_file.destination).to eq 'path/to/file'
+      config_file.source = source
+      expect(config_file.destination).to eq source
+    end
+
+    context "when host-specific file found" do
+
+      it "uses the source path to set the destination" do
+        config_file.source = source
+        allow(config_file).to receive(:search_for_host_specific_file).with(source)
+        .and_return('path/../src_name.hostname.ext')
+        expect(config_file.destination).to eq source
+      end
     end
   end
 
