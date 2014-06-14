@@ -10,6 +10,7 @@ _Simple and intelligent configuration file management._
 [![Build Status](http://img.shields.io/travis/razor-x/config_curator.svg)](https://travis-ci.org/razor-x/config_curator)
 [![Coverage Status](http://img.shields.io/coveralls/razor-x/config_curator.svg)](https://coveralls.io/r/razor-x/config_curator)
 [![Code Climate](http://img.shields.io/codeclimate/github/razor-x/config_curator.svg)](https://codeclimate.com/github/razor-x/config_curator)
+[![Inline Docs](http://inch-ci.org/github/razor-x/config_curator.svg)](http://inch-ci.org/github/razor-x/config_curator)
 
 ## Installation
 
