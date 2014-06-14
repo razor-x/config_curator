@@ -32,7 +32,7 @@ module ConfigCurator
 
     private
 
-    # Recursively creates the necessary directories and install the component.
+    # Recursively creates the necessary directories and installs the component.
     # Any files in the install directory not in the source directory are removed.
     # Use rsync if available.
     def install_component
