@@ -4,13 +4,13 @@ by Evan Boyd Sosenko.
 
 _Simple and intelligent configuration file management._
 
-[![Gem Version](http://img.shields.io/gem/v/config_curator.svg)](https://rubygems.org/gems/config_curator)
-[![MIT License](http://img.shields.io/badge/license-MIT-red.svg)](./LICENSE.txt)
-[![Dependency Status](http://img.shields.io/gemnasium/razor-x/config_curator.svg)](https://gemnasium.com/razor-x/config_curator)
-[![Build Status](http://img.shields.io/travis/razor-x/config_curator.svg)](https://travis-ci.org/razor-x/config_curator)
-[![Coverage Status](http://img.shields.io/coveralls/razor-x/config_curator.svg)](https://coveralls.io/r/razor-x/config_curator)
-[![Code Climate](http://img.shields.io/codeclimate/github/razor-x/config_curator.svg)](https://codeclimate.com/github/razor-x/config_curator)
-[![Inline Docs](http://inch-ci.org/github/razor-x/config_curator.svg)](http://inch-ci.org/github/razor-x/config_curator)
+[![Gem Version](http://img.shields.io/gem/v/config_curator.svg?style=flat)](https://rubygems.org/gems/config_curator)
+[![MIT License](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](./LICENSE.txt)
+[![Dependency Status](http://img.shields.io/gemnasium/razor-x/config_curator.svg?style=flat)](https://gemnasium.com/razor-x/config_curator)
+[![Build Status](http://img.shields.io/travis/razor-x/config_curator.svg?style=flat)](https://travis-ci.org/razor-x/config_curator)
+[![Coverage Status](http://img.shields.io/coveralls/razor-x/config_curator.svg?style=flat)](https://coveralls.io/r/razor-x/config_curator)
+[![Code Climate](http://img.shields.io/codeclimate/github/razor-x/config_curator.svg?style=flat)](https://codeclimate.com/github/razor-x/config_curator)
+[![Inline Docs](http://inch-ci.org/github/razor-x/config_curator.svg?style=flat)](http://inch-ci.org/github/razor-x/config_curator)
 
 ## Installation
 
