@@ -1,0 +1,8 @@
+--markup-provider=redcarpet
+--markup=markdown
+--plugin redcarpet-ext
+lib/**/*.rb
+-
+README.md
+CHANGELOG.md
+LICENSE.txt
