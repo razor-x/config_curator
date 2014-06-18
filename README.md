@@ -133,7 +133,7 @@ Guard tasks have been separated into the following groups:
 - `lint`
 - `unit`
 
-By default, guard will generate documentation, lint, and run unit tests.
+By default, Guard will generate documentation, lint, and run unit tests.
 
 ## Contributing
 
