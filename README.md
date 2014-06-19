@@ -73,6 +73,35 @@ and summarized under [Releases].
 [Releases]: https://github.com/razor-x/ruby-gem/releases
 [The Unlicense]: http://unlicense.org/UNLICENSE
 
+#### Add future update support
+
+If you want to merge in future updates from this skeleton and have your own origin,
+set up a separate branch to track this.
+
+````bash
+$ git remote rename origin upstream
+$ git branch ruby-gem
+$ git branch -u upstream/master ruby-gem
+````
+
+Then add an origin and push master
+
+````bash
+$ git remote add origin git@github.com:your_username/your_gemname.git
+$ git push -u origin master
+````
+
+Now, the `ruby-gem` branch will pull changes from this project,
+which you can then merge into your other branches.
+
+If you later clone your repo you will need to create the update branch again.
+
+````bash
+$ git remote add upstream https://github.com/razor-x/ruby-gem.git
+$ git fetch upstream
+$ git checkout -b ruby-gem upstream/master
+````
+
 ## Installation
 
 Add this line to your application's Gemfile:
