@@ -49,7 +49,17 @@ demonstration purposes only and does not apply to this software.
 
 4. Everything else that should be filled in before using this skeleton
    has been marked with the terms `replace` or `Replace`.
-   To see a list of what needs to be replaced, run
+   You can replace the placeholder gem name with your own with
+
+````bash
+$ git mv replace_gemname.gemspec your_gemname.gemspec
+$ git mv lib/replace_gemname.rb lib/your_gemname.rb
+$ git mv lib/replace_gemname lib/your_gemname
+$ git ls-files -z | xargs -0 sed -i 's/replace_gemname/your_gemname/g'
+$ git ls-files -z | xargs -0 sed -i 's/ReplaceGemname/YourGemname/g'
+````
+
+5. Then, to see a list of what else still needs to be replaced, run
 
 ````bash
 $ grep -Ri replace
