@@ -47,7 +47,7 @@ demonstration purposes only and does not apply to this software.
    - Update the Contributing section.
    - Remove or update the badges.
 
-4. Everything else that should be filled in before using this skeleton
+3. Everything else that should be filled in before using this skeleton
    has been marked with the terms `replace` or `Replace`.
    You can replace the placeholder gem name with your own with
 
@@ -59,7 +59,7 @@ $ git ls-files -z | xargs -0 sed -i 's/replace_gemname/your_gemname/g'
 $ git ls-files -z | xargs -0 sed -i 's/ReplaceGemname/YourGemname/g'
 ````
 
-5. Then, to see a list of what else still needs to be replaced, run
+   To see a list of what else still needs to be replaced, run
 
 ````bash
 $ grep -Ri replace
