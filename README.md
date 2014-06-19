@@ -49,7 +49,7 @@ demonstration purposes only and does not apply to this software.
 
 3. Everything else that should be filled in before using this skeleton
    has been marked with the terms `replace` or `Replace`.
-   You can replace the placeholder gem name with your own with
+   You can replace the placeholder gem name with your own using
 
 ````bash
 $ git mv replace_gemname.gemspec your_gemname.gemspec
