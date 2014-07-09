@@ -1,10 +1,8 @@
 module ConfigCurator
-
   # A symlink is a symbolic link that should be created.
   # The {#destination_path} will be a link
   # that points to the {#source_path}.
   class Symlink < Unit
-
     # (see Unit#install)
     def install
       s = super
@@ -17,8 +15,8 @@ module ConfigCurator
     def install?
       s = super
       return s unless s
-      fail InstallFailed, "No source file specified." if source_path.nil?
-      fail InstallFailed, "No destination specified." if destination_path.nil?
+      fail InstallFailed, 'No source file specified.' if source_path.nil?
+      fail InstallFailed, 'No destination specified.' if destination_path.nil?
       true
     end
 
@@ -30,5 +28,4 @@ module ConfigCurator
       FileUtils.symlink source_path, destination_path, force: true
     end
   end
-
 end

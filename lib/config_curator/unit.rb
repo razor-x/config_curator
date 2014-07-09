@@ -2,12 +2,10 @@ require 'logger'
 require 'socket'
 
 module ConfigCurator
-
   # A unit is the base class for a type of configuration
   # that should be installed.
   # All units must specify a {#source} and a {#destination}.
   class Unit
-
     include Utils
 
     # Error if the unit will fail to install.
@@ -24,7 +22,7 @@ module ConfigCurator
       package_tool: nil,
     }
 
-    def initialize options: {}, logger: nil
+    def initialize(options: {}, logger: nil)
       self.options options
       self.logger = logger unless logger.nil?
     end
@@ -32,7 +30,7 @@ module ConfigCurator
     # Uses {DEFAULT_OPTIONS} as initial value.
     # @param options [Hash] merged with current options
     # @return [Hash] current options
-    def options options = {}
+    def options(options = {})
       @options ||= DEFAULT_OPTIONS
       @options = @options.merge options
     end
@@ -99,7 +97,7 @@ module ConfigCurator
     # Checks if the packages required for this unit are installed.
     # @return [Boolean] if the packages in {#packages} are installed
     def packages_installed?
-      packages.map(&method(:pkg_exists?)).delete_if{ |e| e }.empty?
+      packages.map(&method(:pkg_exists?)).delete_if { |e| e }.empty?
     end
 
     private
@@ -110,9 +108,8 @@ module ConfigCurator
     end
 
     # @return [Boolean] if the package exists on the system
-    def pkg_exists? pkg
+    def pkg_exists?(pkg)
       package_lookup.installed? pkg
     end
   end
-
 end

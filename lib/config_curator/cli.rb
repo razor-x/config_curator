@@ -2,10 +2,8 @@ require 'logger'
 require 'thor'
 
 module ConfigCurator
-
   # Thor class for the `curate` command.
   class CLI < Thor
-
     default_task :install
 
     class_option :verbose, type: :boolean, aliases: %i(v)
@@ -15,10 +13,11 @@ module ConfigCurator
     # Installs the collection.
     # @param manifest [String] path to the manifest file to use
     # @return [Boolean] value of {Collection#install} or {Collection#install?}
-    desc "install", "Installs all units in collection."
-    option :dryrun, type: :boolean, aliases: %i(n),
-      desc: %q{Only simulate the install. Don't make any actual changes.}
-    def install manifest='manifest.yml'
+    desc 'install', 'Installs all units in collection.'
+    option :dryrun,
+           type: :boolean, aliases: %i(n),
+           desc: %q{Only simulate the install. Don't make any actual changes.}
+    def install(manifest = 'manifest.yml')
       unless File.exists? manifest
         logger.fatal { "Manifest file '#{manifest}' does not exist." }
         return false
@@ -37,11 +36,10 @@ module ConfigCurator
         end
 
       if result then logger.info msg else logger.error msg end
-      return result
+      result
     end
 
     no_commands do
-
       # Makes a collection object to use for the instance.
       # @return [Collection] the collection object
       def collection
@@ -70,5 +68,4 @@ module ConfigCurator
       end
     end
   end
-
 end

@@ -2,7 +2,6 @@ require 'mkmf'
 require 'open3'
 
 module ConfigCurator
-
   # Lookup if a package is installed on the system.
   # See {TOOLS} for supported package tools.
   # If {#tool} is not explicitly set, it will try and choose one automatically.
@@ -11,7 +10,6 @@ module ConfigCurator
   # @example Lookup a package using `pacman`
   #   PackageLookup.new(tool: :pacman).installed? 'ruby' #=> true
   class PackageLookup
-
     include Utils
 
     # Error when a package lookup cannot be completed.
@@ -27,7 +25,7 @@ module ConfigCurator
 
     attr_accessor :tool, :tools
 
-    def initialize tool: nil
+    def initialize(tool: nil)
       self.tool = tool
     end
 
@@ -54,7 +52,7 @@ module ConfigCurator
     # Checks if package is installed.
     # @param package [String] package name to check
     # @return [Boolean] if package is installed
-    def installed? package
+    def installed?(package)
       fail LookupFailed, 'No supported package tool found.' if tool.nil?
 
       cmd = tools[tool]
@@ -69,26 +67,25 @@ module ConfigCurator
     # Tool specific package lookup methods below.
     #
 
-    def dpkg package
+    def dpkg(package)
       cmd = command? 'dpkg'
       Open3.popen3 cmd, '-s', package do |_, _ , _, wait_thr|
         wait_thr.value.to_i == 0
       end
     end
 
-    def pacman package
+    def pacman(package)
       cmd = command? 'pacman'
       Open3.popen3 cmd, '-qQ', package do |_, _ , _, wait_thr|
         wait_thr.value.to_i == 0
       end
     end
 
-    def pkgng package
+    def pkgng(package)
       cmd = command? 'pkg'
       Open3.popen3 cmd, 'info', package do |_, _ , _, wait_thr|
         wait_thr.value.to_i == 0
       end
     end
   end
-
 end

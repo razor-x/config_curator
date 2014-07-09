@@ -33,7 +33,7 @@ describe ConfigCurator::CLI do
 
     context "when --dryrun is set" do
 
-      before(:each) { allow(cli).to receive(:options).and_return({dryrun: true}) }
+      before(:each) { allow(cli).to receive(:options).and_return(dryrun: true) }
 
       it "only checks if install would succeed" do
         allow(File).to receive(:exists?).with('manifest.yml').and_return(true)
@@ -55,7 +55,7 @@ describe ConfigCurator::CLI do
 
       context "when --dryrun is set" do
 
-        before(:each) { allow(cli).to receive(:options).and_return({dryrun: true}) }
+        before(:each) { allow(cli).to receive(:options).and_return(dryrun: true) }
 
         it "returns false and doesn't do anything else" do
           allow(File).to receive(:exists?).with('manifest.yml').and_return(false)

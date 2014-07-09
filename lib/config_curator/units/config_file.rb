@@ -1,8 +1,6 @@
 module ConfigCurator
-
   # A config file is a file that should be copied.
   class ConfigFile < Unit
-
     attr_accessor :fmode, :owner, :group
 
     # Will use files of the form `filename.hostname.ext` if found.
@@ -34,8 +32,8 @@ module ConfigCurator
     def install?
       s = super
       return s unless s
-      fail InstallFailed, "No file source path specified." if source_path.nil?
-      fail InstallFailed, "Source path does not exist: #{source}" unless File.exists? source_path
+      fail InstallFailed, 'No file source path specified.' if source_path.nil?
+      fail InstallFailed, "Source path does not exist: #{source}" unless File.exist? source_path
       true
     end
 
@@ -61,11 +59,11 @@ module ConfigCurator
 
     # Will look for files with the naming pattern `filename.hostname.ext`.
     # @param path [String] path to the non-host-specific file
-    def search_for_host_specific_file path
+    def search_for_host_specific_file(path)
       directory = File.dirname path
       extension = File.extname path
       basename = File.basename path.chomp(extension)
-      if Dir.exists? directory
+      if Dir.exist? directory
         file = Dir.entries(directory).grep(/^#{basename}.#{hostname.downcase}/).first
         File.join directory, file unless file.nil?
       else
@@ -73,5 +71,4 @@ module ConfigCurator
       end
     end
   end
-
 end

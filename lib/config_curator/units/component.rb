@@ -1,13 +1,11 @@
 require 'mkmf'
 
 module ConfigCurator
-
   # A component is a folder that should be copied.
   # The {#destination} will become a mirror of the {#source}.
   # The contents of the {#destination_path} is
   # completely replaced by the contents of the {#source_path}.
   class Component < Unit
-
     attr_accessor :fmode, :dmode, :owner, :group
 
     # (see Unit#install)
@@ -24,9 +22,9 @@ module ConfigCurator
     def install?
       s = super
       return s unless s
-      fail InstallFailed, "No component source path specified." if source_path.nil?
-      fail InstallFailed, "No component install path specified." if destination_path.nil?
-      fail InstallFailed, "Source path does not exist: #{source}" unless Dir.exists? source_path
+      fail InstallFailed, 'No component source path specified.' if source_path.nil?
+      fail InstallFailed, 'No component install path specified.' if destination_path.nil?
+      fail InstallFailed, "Source path does not exist: #{source}" unless Dir.exist? source_path
       true
     end
 
@@ -55,9 +53,9 @@ module ConfigCurator
       find = command? 'find'
       if chmod && find
         {fmode: 'f', dmode: 'd'}.each do |k, v|
-          next if self.send(k).nil?
+          next if send(k).nil?
           cmd = [find,  destination_path, '-type', v, '-exec']
-          cmd.concat [chmod, self.send(k).to_s(8), '{}', '+']
+          cmd.concat [chmod, send(k).to_s(8), '{}', '+']
           logger.debug { "Running command: #{cmd.join ' '}" }
           system *cmd
         end
@@ -76,5 +74,4 @@ module ConfigCurator
       end
     end
   end
-
 end

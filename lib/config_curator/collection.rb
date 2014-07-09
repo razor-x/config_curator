@@ -3,12 +3,10 @@ require 'logger'
 require 'yaml'
 
 module ConfigCurator
-
   # Manages collections of units.
   # @example Load a list of units and install them
   #  Collection.new(manifest_path: 'manifest.yml').install
   class Collection
-
     # Supported unit types.
     UNIT_TYPES = %i(unit component config_file symlink)
 
@@ -24,9 +22,9 @@ module ConfigCurator
 
     attr_accessor :logger, :manifest, :units
 
-    def initialize manifest_path: nil, logger: nil
+    def initialize(manifest_path: nil, logger: nil)
       self.logger = logger unless logger.nil?
-      self.load_manifest manifest_path unless manifest_path.nil?
+      load_manifest manifest_path unless manifest_path.nil?
     end
 
     # Logger instance to use.
@@ -40,7 +38,7 @@ module ConfigCurator
     # Loads the manifest from file.
     # @param file [Hash] the yaml file to load
     # @return [Hash] the loaded manifest
-    def load_manifest file
+    def load_manifest(file)
       self.manifest = YAML.load_file file
     end
 
@@ -86,7 +84,7 @@ module ConfigCurator
     # Checks all units in the manifest for any detectable install issues.
     # @param quiet [Boolean] suppress some {#logger} output
     # @return [Boolean] if units can be installed
-    def install? quiet: false
+    def install?(quiet: false)
       result = true
       UNIT_TYPES.each do |t|
         type_name = t.to_s.humanize capitalize: false
@@ -109,7 +107,7 @@ module ConfigCurator
     # @param type [Symbol] a unit type in {UNIT_TYPES}
     # @param attributes [Hash] attributes for the unit from {UNIT_ATTRIBUTESS}
     # @return [Unit] the unit object of the appropriate subclass
-    def create_unit type, attributes: {}
+    def create_unit(type, attributes: {})
       options = {}
       %i(root package_tool).each do |k|
         options[k] = manifest[k] unless manifest[k].nil?
@@ -136,5 +134,4 @@ module ConfigCurator
       manifest[:defaults].nil? ? {} : manifest[:defaults]
     end
   end
-
 end
