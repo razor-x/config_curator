@@ -51,14 +51,15 @@ module ConfigCurator
     def set_mode
       chmod = command? 'chmod'
       find = command? 'find'
-      if chmod && find
-        {fmode: 'f', dmode: 'd'}.each do |k, v|
-          next if send(k).nil?
-          cmd = [find,  destination_path, '-type', v, '-exec']
-          cmd.concat [chmod, send(k).to_s(8), '{}', '+']
-          logger.debug { "Running command: #{cmd.join ' '}" }
-          system(*cmd)
-        end
+
+      return unless chmod && find
+
+      {fmode: 'f', dmode: 'd'}.each do |k, v|
+        next if send(k).nil?
+        cmd = [find,  destination_path, '-type', v, '-exec']
+        cmd.concat [chmod, send(k).to_s(8), '{}', '+']
+        logger.debug { "Running command: #{cmd.join ' '}" }
+        system(*cmd)
       end
     end
 
@@ -67,11 +68,12 @@ module ConfigCurator
     def set_owner
       return unless owner || group
       chown = command? 'chown'
-      if chown
-        cmd = [chown, '-R', "#{owner}:#{group}", destination_path]
-        logger.debug { "Running command: #{cmd.join ' '}" }
-        system(*cmd)
-      end
+
+      return unless chown
+
+      cmd = [chown, '-R', "#{owner}:#{group}", destination_path]
+      logger.debug { "Running command: #{cmd.join ' '}" }
+      system(*cmd)
     end
   end
 end
