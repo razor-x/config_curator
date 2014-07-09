@@ -42,9 +42,8 @@ module ConfigCurator
       return @tool if @tool
 
       tools.each do |k, v|
-        if command? v
-          return @tool = k
-        end
+        next unless command? v
+        return @tool = k
       end
       @tool
     end
