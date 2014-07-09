@@ -35,7 +35,7 @@ module ConfigCurator
           'failed. No changes were made.'
         end
 
-      if result then logger.info msg else logger.error msg end
+      result ? logger.info(msg) : logger.error(msg)
       result
     end
 
