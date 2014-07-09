@@ -57,7 +57,7 @@ module ConfigCurator
           cmd = [find,  destination_path, '-type', v, '-exec']
           cmd.concat [chmod, send(k).to_s(8), '{}', '+']
           logger.debug { "Running command: #{cmd.join ' '}" }
-          system *cmd
+          system(*cmd)
         end
       end
     end
@@ -70,7 +70,7 @@ module ConfigCurator
       if chown
         cmd = [chown, '-R', "#{owner}:#{group}", destination_path]
         logger.debug { "Running command: #{cmd.join ' '}" }
-        system *cmd
+        system(*cmd)
       end
     end
   end

@@ -20,7 +20,7 @@ module ConfigCurator
     TOOLS = {
       dpkg: 'dpkg',
       pacman: 'pacman',
-      pkgng: 'pkg',
+      pkgng: 'pkg'
     }
 
     attr_accessor :tool, :tools

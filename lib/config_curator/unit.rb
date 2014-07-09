@@ -19,7 +19,7 @@ module ConfigCurator
       root: Dir.home,
 
       # Package tool to use. See #package_lookup.
-      package_tool: nil,
+      package_tool: nil
     }
 
     def initialize(options: {}, logger: nil)

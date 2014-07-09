@@ -17,7 +17,7 @@ module ConfigCurator
       unit: %i(hosts packages),
       component: %i(hosts packages fmode dmode owner group),
       config_file: %i(hosts packages fmode owner group),
-      symlink: %i(hosts packages),
+      symlink: %i(hosts packages)
     }
 
     attr_accessor :logger, :manifest, :units

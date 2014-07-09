@@ -8,7 +8,12 @@ module ConfigCurator
     def source
       path = super
       host_specific_file = search_for_host_specific_file path if path
-      if host_specific_file then return host_specific_file else return path end
+
+      if host_specific_file
+        return host_specific_file
+      else
+        return path
+      end
     end
 
     # (see Unit#destination)
