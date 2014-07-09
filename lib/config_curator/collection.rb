@@ -50,10 +50,11 @@ module ConfigCurator
           k = type.to_s.pluralize.to_sym
           u[k] = []
 
-          if manifest
-            manifest[k].each do |v|
-              u[k] << create_unit(type, attributes: v)
-            end unless manifest[k].nil?
+          next unless manifest
+          next if manifest[k].nil?
+
+          manifest[k].each do |v|
+            u[k] << create_unit(type, attributes: v)
           end
         end
       end
