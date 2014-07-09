@@ -4,6 +4,14 @@ AllCops:
     - Guardfile
     - Rakefile
 
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%q': '{}'
+    '%Q': '{}'
+
 Style/RegexpLiteral:
   Exclude:
     - Guardfile
+
+Style/SpaceInsideHashLiteralBraces:
+  Enabled: false
