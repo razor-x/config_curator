@@ -38,7 +38,7 @@ module ConfigCurator
         FileUtils.mkdir_p destination_path
         cmd = [command?('rsync'), '-rt', '--del', "#{source_path}/", destination_path]
         logger.debug { "Running command: #{cmd.join ' '}" }
-        system *cmd
+        system(*cmd)
       else
         FileUtils.remove_entry_secure destination_path
         FileUtils.mkdir_p destination_path
