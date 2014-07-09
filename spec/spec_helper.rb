@@ -1,5 +1,3 @@
-require 'config_curator'
-
 require 'coveralls'
 require 'simplecov'
 
@@ -10,8 +8,14 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
 
 SimpleCov.start
 
+require 'config_curator'
+
 RSpec.configure do |c|
   c.expect_with(:rspec) { |e| e.syntax = :expect }
+
+  c.before(:each) do
+    allow(FileUtils).to receive(:remove_entry_secure).with(anything)
+  end
 
   stderr = $stderr
   stdout = $stdout
@@ -23,6 +27,4 @@ RSpec.configure do |c|
     $stderr = stderr
     $stdout = stdout
   end
-
-  c.before(:each) { allow(FileUtils).to receive(:remove_entry_secure).with(anything) }
 end

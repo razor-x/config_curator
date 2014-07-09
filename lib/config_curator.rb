@@ -7,7 +7,3 @@ require 'config_curator/unit'
 require 'config_curator/units/config_file'
 require 'config_curator/units/symlink'
 require 'config_curator/units/component'
-
-# Simple and intelligent configuration file management.
-module ConfigCurator
-end

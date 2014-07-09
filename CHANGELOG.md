@@ -1,4 +1,4 @@
-# Config Curator ChangeLog
+# ChangeLog
 
 ## 0.1.0
 

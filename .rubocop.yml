@@ -1,0 +1,9 @@
+AllCops:
+  Include:
+    - Gemfile
+    - Guardfile
+    - Rakefile
+
+Style/RegexpLiteral:
+  Exclude:
+    - Guardfile
