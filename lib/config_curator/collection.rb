@@ -13,7 +13,7 @@ module ConfigCurator
     # The possible attributes specific to each unit type.
     # This should not include generic attributes
     # such as {Unit#source} and {Unit#destination}.
-    UNIT_ATTRIBUTESS = {
+    UNIT_ATTRIBUTES = {
       unit: %i(hosts packages),
       component: %i(hosts packages fmode dmode owner group),
       config_file: %i(hosts packages fmode owner group),
@@ -86,7 +86,7 @@ module ConfigCurator
 
     # Creates a new unit object for the collection.
     # @param type [Symbol] a unit type in {UNIT_TYPES}
-    # @param attributes [Hash] attributes for the unit from {UNIT_ATTRIBUTESS}
+    # @param attributes [Hash] attributes for the unit from {UNIT_ATTRIBUTES}
     # @return [Unit] the unit object of the appropriate subclass
     def create_unit(type, attributes: {})
       options = {}
@@ -100,7 +100,7 @@ module ConfigCurator
           unit.send "#{v}=".to_sym, attributes[k] unless attributes[k].nil?
         end
 
-        UNIT_ATTRIBUTESS[type].each do |v|
+        UNIT_ATTRIBUTES[type].each do |v|
           unit.send "#{v}=".to_sym, defaults[v] unless defaults[v].nil?
           unit.send "#{v}=".to_sym, attributes[v] unless attributes[v].nil?
         end
