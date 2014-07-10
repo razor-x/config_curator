@@ -63,18 +63,9 @@ module ConfigCurator
     def install
       return false unless install? quiet: !(logger.level == Logger::DEBUG)
 
-      UNIT_TYPES.each do |t|
-        type_name = t.to_s.humanize capitalize: false
-
-        units[t.to_s.pluralize.to_sym].each do |unit|
-          begin
-            if unit.install
-              logger.info { "Installed #{type_name}: #{unit.source} ⇨ #{unit.destination_path}" }
-            end
-          rescue Unit::InstallFailed => e
-            logger.fatal { "Halting install! Install attempt failed for #{type_name}: #{e}" }
-            return nil
-          end
+      UNIT_TYPES.each do |type|
+        units[type.to_s.pluralize.to_sym].each do |unit|
+          return nil unless install_unit(unit, type)
         end
       end
       true
@@ -85,21 +76,9 @@ module ConfigCurator
     # @return [Boolean] if units can be installed
     def install?(quiet: false)
       result = true
-      UNIT_TYPES.each do |t|
-        type_name = t.to_s.humanize capitalize: false
-
-        units[t.to_s.pluralize.to_sym].each do |unit|
-          begin
-            if unit.install?
-              logger.info do
-                "Testing install for #{type_name}:" \
-                " #{unit.source} ⇨ #{unit.destination_path}"
-              end unless quiet
-            end
-          rescue Unit::InstallFailed => e
-            result = false
-            logger.error { "Cannot install #{type_name}: #{e}" }
-          end
+      UNIT_TYPES.each do |type|
+        units[type.to_s.pluralize.to_sym].each do |unit|
+          result = install_unit?(unit, type, quiet) ? result : false
         end
       end
       result
@@ -131,9 +110,47 @@ module ConfigCurator
     private
 
     # Hash of any defaults given in the manifest.
+    # @return [Hash] the defaults
     def defaults
       return {} unless manifest
       manifest[:defaults].nil? ? {} : manifest[:defaults]
+    end
+
+    # Installs a unit.
+    # @param unit [Unit] the unit to install
+    # @param type [Symbol] the unit type
+    # @param quiet [Boolean] suppress some {#logger} output
+    # @return [Boolean] if unit was installed
+    def install_unit(unit, type, quiet = false)
+      type_name = type.to_s.humanize capitalize: false
+      unit.install
+      logger.info do
+        "Installed #{type_name}: #{unit.source} ⇨ #{unit.destination_path}"
+      end unless quiet
+      return true
+
+      rescue Unit::InstallFailed => e
+        logger.fatal { "Halting install! Install attempt failed for #{type_name}: #{e}" }
+        return false
+    end
+
+    # Checks if a unit can be installed.
+    # @param unit [Unit] the unit to check
+    # @param type [Symbol] the unit type
+    # @param quiet [Boolean] suppress some {#logger} output
+    # @return [Boolean] if unit can be installed
+    def install_unit?(unit, type, quiet = false)
+      type_name = type.to_s.humanize capitalize: false
+      unit.install?
+      logger.info do
+        "Testing install for #{type_name}:" \
+        " #{unit.source} ⇨ #{unit.destination_path}"
+      end unless quiet
+      return true
+
+      rescue Unit::InstallFailed => e
+        logger.error { "Cannot install #{type_name}: #{e}" }
+        return false
     end
   end
 end
