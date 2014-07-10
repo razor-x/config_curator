@@ -109,6 +109,13 @@ module ConfigCurator
 
     private
 
+    # Formats a unit type for display.
+    # @param type [Symbol] the unit type
+    # @return [String] formatted unit type
+    def type_name(type)
+      type.to_s.humanize capitalize: false
+    end
+
     # Hash of any defaults given in the manifest.
     # @return [Hash] the defaults
     def defaults
@@ -122,15 +129,14 @@ module ConfigCurator
     # @param quiet [Boolean] suppress some {#logger} output
     # @return [Boolean] if unit was installed
     def install_unit(unit, type, quiet = false)
-      type_name = type.to_s.humanize capitalize: false
       unit.install
       logger.info do
-        "Installed #{type_name}: #{unit.source} ⇨ #{unit.destination_path}"
+        "Installed #{type_name(type)}: #{unit.source} ⇨ #{unit.destination_path}"
       end unless quiet
       return true
 
       rescue Unit::InstallFailed => e
-        logger.fatal { "Halting install! Install attempt failed for #{type_name}: #{e}" }
+        logger.fatal { "Halting install! Install attempt failed for #{type_name(type)}: #{e}" }
         return false
     end
 
@@ -140,16 +146,15 @@ module ConfigCurator
     # @param quiet [Boolean] suppress some {#logger} output
     # @return [Boolean] if unit can be installed
     def install_unit?(unit, type, quiet = false)
-      type_name = type.to_s.humanize capitalize: false
       unit.install?
       logger.info do
-        "Testing install for #{type_name}:" \
+        "Testing install for #{type_name(type)}:" \
         " #{unit.source} ⇨ #{unit.destination_path}"
       end unless quiet
       return true
 
       rescue Unit::InstallFailed => e
-        logger.error { "Cannot install #{type_name}: #{e}" }
+        logger.error { "Cannot install #{type_name(type)}: #{e}" }
         return false
     end
   end
