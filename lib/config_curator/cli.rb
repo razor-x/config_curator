@@ -46,21 +46,24 @@ module ConfigCurator
           log.formatter = proc do |severity, _, _, msg|
             "#{severity} -- #{msg}\n"
           end
-          log.level = \
-            if options[:debug]
-              Logger::DEBUG
-            elsif options[:verbose]
-              Logger::INFO
-            elsif options[:quiet]
-              Logger::FATAL
-            else
-              Logger::WARN
-            end
+          log.level = log_level(options)
         end
       end
     end
 
     private
+
+    def log_level(options)
+      if options[:debug]
+        Logger::DEBUG
+      elsif options[:verbose]
+        Logger::INFO
+      elsif options[:quiet]
+        Logger::FATAL
+      else
+        Logger::WARN
+      end
+    end
 
     def install_message(result, dryrun)
       "Install #{'simulation ' if dryrun}" + \
