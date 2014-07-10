@@ -94,8 +94,8 @@ module ConfigCurator
               logger.info do
                 "Testing install for #{type_name}:" \
                 " #{unit.source} ⇨ #{unit.destination_path}"
-              end
-            end unless quiet
+              end unless quiet
+            end
           rescue Unit::InstallFailed => e
             result = false
             logger.error { "Cannot install #{type_name}: #{e}" }
