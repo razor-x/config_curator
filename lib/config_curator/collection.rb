@@ -53,9 +53,7 @@ module ConfigCurator
           next unless manifest
           next if manifest[k].nil?
 
-          manifest[k].each do |v|
-            u[k] << create_unit(type, attributes: v)
-          end
+          manifest[k].each { |v| u[k] << create_unit(type, attributes: v) }
         end
       end
     end
