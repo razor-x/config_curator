@@ -18,7 +18,7 @@ module ConfigCurator
            type: :boolean, aliases: %i(n),
            desc: %q{Only simulate the install. Don't make any actual changes.}
     def install(manifest = 'manifest.yml')
-      unless File.exists? manifest
+      unless File.exist? manifest
         logger.fatal { "Manifest file '#{manifest}' does not exist." }
         return false
       end

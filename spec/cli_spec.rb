@@ -25,7 +25,7 @@ describe ConfigCurator::CLI do
   describe "#install" do
 
     it "installs the collection" do
-      allow(File).to receive(:exists?).with('manifest.yml').and_return(true)
+      allow(File).to receive(:exist?).with('manifest.yml').and_return(true)
       expect(cli.collection).to receive(:load_manifest).with('manifest.yml')
       expect(cli.collection).to receive(:install).and_return(true)
       expect(cli.install 'manifest.yml').to be true
@@ -36,7 +36,7 @@ describe ConfigCurator::CLI do
       before(:each) { allow(cli).to receive(:options).and_return(dryrun: true) }
 
       it "only checks if install would succeed" do
-        allow(File).to receive(:exists?).with('manifest.yml').and_return(true)
+        allow(File).to receive(:exist?).with('manifest.yml').and_return(true)
         expect(cli.collection).to receive(:load_manifest).with('manifest.yml')
         expect(cli.collection).to receive(:install?).and_return(true)
         expect(cli.collection).to_not receive(:install)
@@ -47,7 +47,7 @@ describe ConfigCurator::CLI do
     context "manifest not found" do
 
       it "returns false and doesn't do anything else" do
-        allow(File).to receive(:exists?).with('manifest.yml').and_return(false)
+        allow(File).to receive(:exist?).with('manifest.yml').and_return(false)
         expect(cli.collection).to_not receive(:install)
         expect(cli.collection).to_not receive(:install?)
         expect(cli.install 'manifest.yml').to be false
@@ -58,7 +58,7 @@ describe ConfigCurator::CLI do
         before(:each) { allow(cli).to receive(:options).and_return(dryrun: true) }
 
         it "returns false and doesn't do anything else" do
-          allow(File).to receive(:exists?).with('manifest.yml').and_return(false)
+          allow(File).to receive(:exist?).with('manifest.yml').and_return(false)
           expect(cli.collection).to_not receive(:install)
           expect(cli.collection).to_not receive(:install?)
           expect(cli.install 'manifest.yml').to be false
