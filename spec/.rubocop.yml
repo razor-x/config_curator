@@ -2,3 +2,6 @@ inherit_from: ../.rubocop.yml
 
 Style/StringLiterals:
   Enabled: false
+
+Style/LineLength:
+  Max: 120
