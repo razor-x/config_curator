@@ -1,6 +1,6 @@
 # ChangeLog
 
-## HEAD
+## 0.2.0
 
 - Merged [ruby-gem](https://github.com/razor-x/ruby-gem) for improved development.
 - Style changes and refactoring to pass Rubocop.
