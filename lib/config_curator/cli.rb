@@ -26,15 +26,7 @@ module ConfigCurator
       collection.load_manifest manifest
       result = options[:dryrun] ? collection.install? : collection.install
 
-      msg = "Install #{'simulation ' if options[:dryrun]}" + \
-        if result
-          'completed without error.'
-        elsif result.nil?
-          'failed.'
-        else
-          'failed. No changes were made.'
-        end
-
+      msg = install_message(result, options[:dryrun])
       result ? logger.info(msg) : logger.error(msg)
       result
     end
@@ -66,6 +58,19 @@ module ConfigCurator
             end
         end
       end
+    end
+
+    private
+
+    def install_message(result, dryrun)
+      "Install #{'simulation ' if dryrun}" + \
+        if result
+          'completed without error.'
+        elsif result.nil?
+          'failed.'
+        else
+          'failed. No changes were made.'
+        end
     end
   end
 end
