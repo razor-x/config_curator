@@ -89,13 +89,8 @@ module ConfigCurator
     # @param attributes [Hash] attributes for the unit from {UNIT_ATTRIBUTES}
     # @return [Unit] the unit object of the appropriate subclass
     def create_unit(type, attributes: {})
-      options = {}
-      %i(root package_tool).each do |k|
-        options[k] = manifest[k] unless manifest[k].nil?
-      end if manifest
-
       "#{self.class.name.split('::').first}::#{type.to_s.camelize}".constantize
-      .new(options: options, logger: logger).tap do |unit|
+      .new(options: unit_options, logger: logger).tap do |unit|
         {src: :source, dst: :destination}.each do |k, v|
           unit.send "#{v}=".to_sym, attributes[k] unless attributes[k].nil?
         end
@@ -121,6 +116,17 @@ module ConfigCurator
     def defaults
       return {} unless manifest
       manifest[:defaults].nil? ? {} : manifest[:defaults]
+    end
+
+    # Load basic unit options from the manifest.
+    # @return [Hash] the options
+    def unit_options
+      options = {}
+      return options unless manifest
+      %i(root package_tool).each do |k|
+        options[k] = manifest[k] unless manifest[k].nil?
+      end
+      options
     end
 
     # Installs a unit.
