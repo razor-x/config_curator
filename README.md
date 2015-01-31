@@ -21,10 +21,12 @@ Use this project freely as a base for your testable Ruby gems.
 * Linting with [RuboCop].
 * Unit testing with [RSpec].
 * [Travis CI] ready.
+* [EditorConfig].
 * Badges from [Shields.io]!
 
 [Bump]: https://github.com/gregorym/bump
 [Bundler]: http://bundler.io/
+[EditorConfig]: http://editorconfig.org/
 [Guard]: http://guardgem.org/
 [Rake]: https://github.com/jimweirich/rake
 [RSpec]: http://rspec.info/
