@@ -47,7 +47,7 @@ module ConfigCurator
     # Unit objects defined by the manifest and organized by type.
     # @return [Hash] keys are pluralized unit types from {UNIT_TYPES}
     def units
-      @units ||= ActiveSupport::HashWithIndifferentAccess.new.tap do |u|
+      @units ||= {}.tap do |u|
         UNIT_TYPES.each do |type|
           k = type.to_s.pluralize.to_sym
           u[k] = []
