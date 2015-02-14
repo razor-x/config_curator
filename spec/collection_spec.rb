@@ -23,7 +23,9 @@ describe ConfigCurator::Collection do
   end
 
   describe "#load_manifest" do
-    let(:manifest) { {root: 'tmp'} }
+    let(:manifest) do
+      ActiveSupport::HashWithIndifferentAccess.new(root: 'tmp')
+    end
 
     it "loads the manifest" do
       path = 'path/to/manifest'

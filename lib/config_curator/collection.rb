@@ -1,3 +1,4 @@
+require 'active_support/core_ext/hash'
 require 'active_support/core_ext/string'
 require 'logger'
 require 'yaml'
@@ -39,7 +40,8 @@ module ConfigCurator
     # @param file [Hash] the yaml file to load
     # @return [Hash] the loaded manifest
     def load_manifest(file)
-      self.manifest = YAML.load_file file
+      self.manifest =
+        ActiveSupport::HashWithIndifferentAccess.new YAML.load_file(file)
     end
 
     # Unit objects defined by the manifest and organized by type.
