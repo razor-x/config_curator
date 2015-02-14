@@ -1,13 +1,13 @@
 # Ruby Gem Skeleton
 
 <!--
-[![Gem Version](https://img.shields.io/gem/v/replace_gemname.svg?style=flat)](https://rubygems.org/gems/replace_gemname)
+[![Gem Version](https://img.shields.io/gem/v/replace_gemname.svg)](https://rubygems.org/gems/replace_gemname)
 -->
-[![MIT License](https://img.shields.io/badge/license-MIT-red.svg?style=flat)](./LICENSE.txt)
-[![Dependency Status](https://img.shields.io/gemnasium/razor-x/ruby-gem.svg?style=flat)](https://gemnasium.com/razor-x/ruby-gem)
-[![Build Status](https://img.shields.io/travis/razor-x/ruby-gem.svg?style=flat)](https://travis-ci.org/razor-x/ruby-gem)
-[![Coverage Status](https://img.shields.io/coveralls/razor-x/ruby-gem.svg?style=flat)](https://coveralls.io/r/razor-x/ruby-gem)
-[![Code Climate](https://img.shields.io/codeclimate/github/razor-x/ruby-gem.svg?style=flat)](https://codeclimate.com/github/razor-x/ruby-gem)
+[![MIT License](https://img.shields.io/badge/license-MIT-red.svg)](./LICENSE.txt)
+[![Dependency Status](https://img.shields.io/gemnasium/razor-x/ruby-gem.svg)](https://gemnasium.com/razor-x/ruby-gem)
+[![Build Status](https://img.shields.io/travis/razor-x/ruby-gem.svg)](https://travis-ci.org/razor-x/ruby-gem)
+[![Coverage Status](https://img.shields.io/coveralls/razor-x/ruby-gem.svg)](https://coveralls.io/r/razor-x/ruby-gem)
+[![Code Climate](https://img.shields.io/codeclimate/github/razor-x/ruby-gem.svg)](https://codeclimate.com/github/razor-x/ruby-gem)
 
 Use this project freely as a base for your testable Ruby gems.
 
