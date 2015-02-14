@@ -1,11 +1,9 @@
 require 'spec_helper'
 
 describe ConfigCurator::Unit do
-
   subject(:unit) { ConfigCurator::Unit.new }
 
   describe ".new" do
-
     it "sets the logger" do
       logger = Logger.new(STDOUT)
       unit = ConfigCurator::Unit.new logger: logger
@@ -23,14 +21,12 @@ describe ConfigCurator::Unit do
   end
 
   describe "#logger" do
-
     it "makes a new logger" do
       expect(unit.logger).to be_a Logger
     end
   end
 
   describe "#options" do
-
     it "merges with default options" do
       unit.options[:root] = '/home/user'
       expect(unit.options).to eq ConfigCurator::Unit::DEFAULT_OPTIONS.merge(root: '/home/user')
@@ -44,14 +40,12 @@ describe ConfigCurator::Unit do
   end
 
   describe "#source_path" do
-
     it "expands the path" do
       unit.source = 'path/../src_name'
       expect(unit.source_path).to eq File.expand_path('path/../src_name')
     end
 
     context "when no source given" do
-
       it "returns nil" do
         expect(unit.source_path).to eq nil
       end
@@ -59,7 +53,6 @@ describe ConfigCurator::Unit do
   end
 
   describe "#destination_path" do
-
     it "expands the path" do
       unit.destination = 'path/../dest_name'
       unit.options[:root] = '/tmp'
@@ -67,7 +60,6 @@ describe ConfigCurator::Unit do
     end
 
     context "when no destination given" do
-
       it "returns nil" do
         expect(unit.destination_path).to eq nil
       end
@@ -75,7 +67,6 @@ describe ConfigCurator::Unit do
   end
 
   describe "#hosts" do
-
     it "is empty by default" do
       expect(unit.hosts).to be_a Array
       expect(unit.hosts).to be_empty
@@ -83,7 +74,6 @@ describe ConfigCurator::Unit do
   end
 
   describe "#packages" do
-
     it "is empty by default" do
       expect(unit.packages).to be_a Array
       expect(unit.packages).to be_empty
@@ -91,7 +81,6 @@ describe ConfigCurator::Unit do
   end
 
   describe "#package_lookup" do
-
     it "returns a PackageLookup object" do
       expect(unit.package_lookup).to be_a ConfigCurator::PackageLookup
     end
@@ -103,9 +92,7 @@ describe ConfigCurator::Unit do
   end
 
   describe "#install" do
-
     context "when unit should be installed" do
-
       it "returns true" do
         expect(unit).to receive(:install?).and_return(true)
         expect(unit.install).to be true
@@ -113,7 +100,6 @@ describe ConfigCurator::Unit do
     end
 
     context "when unit should not be installed" do
-
       it "returns false" do
         expect(unit).to receive(:install?).and_return(false)
         expect(unit.install).to be false
@@ -122,7 +108,6 @@ describe ConfigCurator::Unit do
   end
 
   describe "#install?" do
-
     it "checks if host is allowed" do
       expect(unit).to receive(:allowed_host?)
       unit.install?
@@ -135,9 +120,7 @@ describe ConfigCurator::Unit do
   end
 
   describe "#allowed_host?" do
-
     context "when hosts are given" do
-
       it "allows host if host is listed" do
         allow(unit).to receive(:hostname).and_return('test_hostname')
         unit.hosts = %w(some_host test_hostname)
@@ -152,7 +135,6 @@ describe ConfigCurator::Unit do
     end
 
     context "when no hosts are given" do
-
       it "allows any host" do
         unit.hosts = []
         expect(unit.allowed_host?).to eq true
@@ -161,9 +143,7 @@ describe ConfigCurator::Unit do
   end
 
   describe "#packages_installed?" do
-
     context "when packages listed" do
-
       it "meets package requirements if no missing packages" do
         allow(unit).to receive(:pkg_exists?).with('good_pkg_1').and_return(true)
         allow(unit).to receive(:pkg_exists?).with('good_pkg_2').and_return(true)
@@ -180,7 +160,6 @@ describe ConfigCurator::Unit do
     end
 
     context "when no packages listed" do
-
       it "meets package requirements" do
         unit.packages = []
         expect(unit.packages_installed?).to eq true

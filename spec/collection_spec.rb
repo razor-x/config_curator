@@ -1,11 +1,9 @@
 require 'spec_helper'
 
 describe ConfigCurator::Collection do
-
   subject(:collection) { ConfigCurator::Collection.new }
 
   describe ".new" do
-
     it "sets the logger" do
       logger = Logger.new(STDOUT)
       collection = ConfigCurator::Collection.new logger: logger
@@ -19,14 +17,12 @@ describe ConfigCurator::Collection do
   end
 
   describe "#logger" do
-
     it "makes a new logger" do
       expect(collection.logger).to be_a Logger
     end
   end
 
   describe "#load_manifest" do
-
     let(:manifest) { {root: 'tmp'} }
 
     it "loads the manifest" do
@@ -38,7 +34,6 @@ describe ConfigCurator::Collection do
   end
 
   describe "#create_unit" do
-
     subject(:unit) { collection.create_unit :unit }
 
     it "makes a new unit" do
@@ -50,7 +45,6 @@ describe ConfigCurator::Collection do
     end
 
     context "with basic attributes" do
-
       let(:attributes) { {src: 'src', dst: 'dest'} }
       subject(:unit) { collection.create_unit :unit, attributes: attributes }
 
@@ -64,7 +58,6 @@ describe ConfigCurator::Collection do
     end
 
     context "with unit specific attributes" do
-
       let(:attributes) { {src: 'src', dst: 'dest', fmode: '0600', owner: 'username'} }
       subject(:unit) { collection.create_unit :component, attributes: attributes }
 
@@ -80,7 +73,6 @@ describe ConfigCurator::Collection do
     end
 
     context "with manifest" do
-
       let(:manifest) do
         YAML.load <<-EOF
           :root: /tmp
@@ -117,14 +109,12 @@ describe ConfigCurator::Collection do
   end
 
   describe "#units" do
-
     let(:types) do
       types = ConfigCurator::Collection::UNIT_TYPES
       types.map { |t| "#{t}s".to_sym }
     end
 
     context "no manifest" do
-
       it "has a key for each supported unit type" do
         types.each do |type|
           expect(collection.units.key? type).to be true
@@ -140,7 +130,6 @@ describe ConfigCurator::Collection do
     end
 
     context "with manifest" do
-
       let(:manifest) do
         YAML.load <<-EOF
           :defaults:
@@ -192,7 +181,6 @@ describe ConfigCurator::Collection do
   end
 
   describe "#install" do
-
     let(:manifest) do
       YAML.load <<-EOF
         :components:
@@ -210,7 +198,6 @@ describe ConfigCurator::Collection do
     let(:units) { collection.units }
 
     context "when #install? is true" do
-
       it "calls #install on each unit and returns true" do
         allow(collection).to receive(:install?).and_return(true)
         expect(units[:components][0]).to receive(:install)
@@ -221,7 +208,6 @@ describe ConfigCurator::Collection do
     end
 
     context "when #install? is false" do
-
       it "does not call #install on each unit and returns false" do
         allow(collection).to receive(:install?).and_return(false)
         expect(units[:components][0]).to_not receive(:install)
@@ -232,7 +218,6 @@ describe ConfigCurator::Collection do
     end
 
     context "when component install fails" do
-
       it "stops installing and returns nil" do
         allow(collection).to receive(:install?).and_return(true)
         expect(units[:components][0]).to receive(:install)
@@ -244,7 +229,6 @@ describe ConfigCurator::Collection do
   end
 
   describe "#install?" do
-
     let(:manifest) do
       YAML.load <<-EOF
         :components:
@@ -262,7 +246,6 @@ describe ConfigCurator::Collection do
     let(:units) { collection.units }
 
     context "when no errors" do
-
       it "calls #install? on each unit and returns true" do
         expect(units[:components][0]).to receive(:install?)
         expect(units[:components][1]).to receive(:install?)
@@ -272,10 +255,9 @@ describe ConfigCurator::Collection do
     end
 
     context "when install error" do
-
       it "calls #install? on each unit and returns false" do
         allow(units[:components][0]).to receive(:install?)
-        .and_raise(ConfigCurator::Unit::InstallFailed)
+          .and_raise(ConfigCurator::Unit::InstallFailed)
         allow(units[:components][1]).to receive(:install?)
         allow(units[:config_files][0]).to receive(:install?)
         expect(collection.install?).to be false

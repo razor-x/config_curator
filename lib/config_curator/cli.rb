@@ -16,7 +16,7 @@ module ConfigCurator
     desc 'install', 'Installs all units in collection.'
     option :dryrun,
            type: :boolean, aliases: %i(n),
-           desc: %q{Only simulate the install. Don't make any actual changes.}
+           desc: "Only simulate the install. Don't make any actual changes."
     def install(manifest = 'manifest.yml')
       unless File.exist? manifest
         logger.fatal { "Manifest file '#{manifest}' does not exist." }

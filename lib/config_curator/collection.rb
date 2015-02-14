@@ -90,7 +90,7 @@ module ConfigCurator
     # @return [Unit] the unit object of the appropriate subclass
     def create_unit(type, attributes: {})
       "#{self.class.name.split('::').first}::#{type.to_s.camelize}".constantize
-      .new(options: unit_options, logger: logger).tap do |unit|
+        .new(options: unit_options, logger: logger).tap do |unit|
         {src: :source, dst: :destination}.each do |k, v|
           unit.send "#{v}=".to_sym, attributes[k] unless attributes[k].nil?
         end
