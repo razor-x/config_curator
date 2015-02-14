@@ -10,13 +10,13 @@ module ConfigCurator
     class_option :quiet, type: :boolean, aliases: %i(q)
     class_option :debug, type: :boolean
 
-    # Installs the collection.
-    # @param manifest [String] path to the manifest file to use
-    # @return [Boolean] value of {Collection#install} or {Collection#install?}
     desc 'install', 'Installs all units in collection.'
     option :dryrun,
            type: :boolean, aliases: %i(n),
            desc: "Only simulate the install. Don't make any actual changes."
+    # Installs the collection.
+    # @param manifest [String] path to the manifest file to use
+    # @return [Boolean] value of {Collection#install} or {Collection#install?}
     def install(manifest = 'manifest.yml')
       unless File.exist? manifest
         logger.fatal { "Manifest file '#{manifest}' does not exist." }
