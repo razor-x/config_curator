@@ -1,5 +1,9 @@
 # ChangeLog
 
+## HEAD
+
+- Allow all keys in manifest to be strings or symbols.
+
 ## 0.2.0
 
 - Merged [ruby-gem](https://github.com/razor-x/ruby-gem) for improved development.
