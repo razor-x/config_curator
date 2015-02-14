@@ -1,11 +1,11 @@
 # Config Curator
 
-[![Gem Version](http://img.shields.io/gem/v/config_curator.svg?style=flat)](https://rubygems.org/gems/config_curator)
-[![MIT License](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](./LICENSE.txt)
-[![Dependency Status](http://img.shields.io/gemnasium/razor-x/config_curator.svg?style=flat)](https://gemnasium.com/razor-x/config_curator)
-[![Build Status](http://img.shields.io/travis/razor-x/config_curator.svg?style=flat)](https://travis-ci.org/razor-x/config_curator)
-[![Coverage Status](http://img.shields.io/coveralls/razor-x/config_curator.svg?style=flat)](https://coveralls.io/r/razor-x/config_curator)
-[![Code Climate](http://img.shields.io/codeclimate/github/razor-x/config_curator.svg?style=flat)](https://codeclimate.com/github/razor-x/config_curator)
+[![Gem Version](https://img.shields.io/gem/v/config_curator.svg)](https://rubygems.org/gems/config_curator)
+[![MIT License](https://img.shields.io/badge/license-MIT-red.svg)](./LICENSE.txt)
+[![Dependency Status](https://img.shields.io/gemnasium/razor-x/config_curator.svg)](https://gemnasium.com/razor-x/config_curator)
+[![Build Status](https://img.shields.io/travis/razor-x/config_curator.svg)](https://travis-ci.org/razor-x/config_curator)
+[![Coverage Status](https://img.shields.io/coveralls/razor-x/config_curator.svg)](https://coveralls.io/r/razor-x/config_curator)
+[![Code Climate](https://img.shields.io/codeclimate/github/razor-x/config_curator.svg)](https://codeclimate.com/github/razor-x/config_curator)
 
 by Evan Boyd Sosenko.
 

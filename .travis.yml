@@ -2,13 +2,12 @@ language: ruby
 cache: bundler
 rvm:
   - 2.0.0
-  - 2.1.1
-  - 2.1.2
+  - 2.1.5
+  - 2.2.0
+cache: bundler
+sudo: false
 
 before_install:
   - 'echo ''gem: --no-document'' > ~/.gemrc'
-
-install:
-  - bundle update
 
 script: bundle exec rake travis
