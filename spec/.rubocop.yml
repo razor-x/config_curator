@@ -3,5 +3,5 @@ inherit_from: ../.rubocop.yml
 Style/StringLiterals:
   Enabled: false
 
-Style/LineLength:
+Metrics/LineLength:
   Max: 120
