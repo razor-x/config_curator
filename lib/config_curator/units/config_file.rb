@@ -71,9 +71,8 @@ module ConfigCurator
       if Dir.exist? directory
         file = Dir.entries(directory).grep(/^#{basename}.#{hostname.downcase}/).first
         File.join directory, file unless file.nil?
-      else
-        nil
       end
+      nil
     end
   end
 end
