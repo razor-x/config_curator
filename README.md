@@ -138,7 +138,7 @@ Documentation for the latest commits is hosted on
 ### Source Code
 
 The [ReplaceGemname source](https://github.com/replace_username/replace_gemname)
-is hosted on GitHub.
+source is hosted on GitHub.
 To clone the project run
 
 ````bash
