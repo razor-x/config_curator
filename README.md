@@ -53,20 +53,20 @@ demonstration purposes only and does not apply to this software.
    has been marked with the terms `replace` or `Replace`.
    You can replace the placeholder gem name with your own using
 
-````bash
+```bash
 $ git mv replace_gemname.gemspec your_gemname.gemspec
 $ git mv lib/replace_gemname.rb lib/your_gemname.rb
 $ git mv lib/replace_gemname lib/your_gemname
 $ git ls-files -z | xargs -0 sed -i 's/replace_gemname/your_gemname/g'
 $ git ls-files -z | xargs -0 sed -i 's/ReplaceGemname/YourGemname/g'
-````
+```
 
    To see a list of what else still needs to be replaced, run
 
-````bash
+```bash
 $ grep -Ri replace
 $ find . -name "*replace*"
-````
+```
 
 Note that `CHANGELOG.md` is just a template for this skeleton.
 The actual changes for this project are documented in the commit history
@@ -80,49 +80,49 @@ and summarized under [Releases].
 If you want to merge in future updates from this skeleton and have your own origin,
 set up a separate branch to track this.
 
-````bash
+```bash
 $ git remote rename origin upstream
 $ git branch ruby-gem
 $ git branch -u upstream/master ruby-gem
-````
+```
 
 Then add an origin and push master
 
-````bash
+```bash
 $ git remote add origin git@github.com:your_username/your_gemname.git
 $ git push -u origin master
-````
+```
 
 Now, the `ruby-gem` branch will pull changes from this project,
 which you can then merge into your other branches.
 
 If you later clone your repo you will need to create the update branch again.
 
-````bash
+```bash
 $ git remote add upstream https://github.com/razor-x/ruby-gem.git
 $ git fetch upstream
 $ git checkout -b ruby-gem upstream/master
-````
+```
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-````ruby
+```ruby
 gem 'replace_gemname'
-````
+```
 
 And then execute:
 
-````bash
+```bash
 $ bundle
-````
+```
 
 Or install it yourself as:
 
-````bash
+```bash
 $ gem install replace_gemname
-````
+```
 
 ## Documentation
 
@@ -141,15 +141,15 @@ The [ReplaceGemname source](https://github.com/replace_username/replace_gemname)
 source is hosted on GitHub.
 To clone the project run
 
-````bash
+```bash
 $ git clone https://github.com/replace_username/replace_gemname.git
-````
+```
 
 ### Rake
 
 Run `rake -T` to see all Rake tasks.
 
-````
+```
 rake all                   # Run all tasks
 rake build                 # Build replace_gemname-0.0.0.gem into the pkg directory
 rake bump:current          # Show current gem version
@@ -164,7 +164,7 @@ rake rubocop               # Run RuboCop
 rake rubocop:auto_correct  # Auto-correct RuboCop offenses
 rake spec                  # Run RSpec code examples
 rake yard                  # Generate YARD Documentation
-````
+```
 
 ### Guard
 
