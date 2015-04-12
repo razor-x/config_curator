@@ -1,6 +1,6 @@
 # ChangeLog
 
-## HEAD
+## 0.2.2
 
 - Copy system links in components when using rsync.
 
