@@ -1,5 +1,9 @@
 # ChangeLog
 
+## HEAD
+
+- Copy system links in components when using rsync.
+
 ## 0.2.1
 
 - Allow all keys in manifest to be strings or symbols.
