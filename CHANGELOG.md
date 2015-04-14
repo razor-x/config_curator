@@ -1,6 +1,6 @@
 # ChangeLog
 
-## HEAD
+## 0.2.3
 
 - Fix bug where component would not install
   if destination does not exist.
