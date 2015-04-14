@@ -1,5 +1,10 @@
 # ChangeLog
 
+## HEAD
+
+- Fix bug where component would not install
+  if destination does not exist.
+
 ## 0.2.2
 
 - Copy system links in components when using rsync.

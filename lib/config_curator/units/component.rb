@@ -40,7 +40,7 @@ module ConfigCurator
         logger.debug { "Running command: #{cmd.join ' '}" }
         system(*cmd)
       else
-        FileUtils.remove_entry_secure destination_path
+        FileUtils.remove_entry_secure destination_path if Dir.exist? destination_path
         FileUtils.mkdir_p destination_path
         FileUtils.cp_r "#{source_path}/.", destination_path, preserve: true
       end
