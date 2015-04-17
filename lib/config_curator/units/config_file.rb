@@ -66,10 +66,18 @@ module ConfigCurator
     # @param path [String] path to the non-host-specific file
     def search_for_host_specific_file(path)
       directory = File.dirname path
+      filename = File.basename path
       extension = File.extname path
-      basename = File.basename path.chomp(extension)
+      basename = filename.chomp(extension)
       if Dir.exist? directory
-        file = Dir.entries(directory).grep(/^#{basename}.#{hostname.downcase}/).first
+        files = Dir.entries(directory)
+
+        file = files.grep(/^#{filename}\.#{hostname.downcase}$/).first
+        return File.join directory, file unless file.nil?
+
+        extension.gsub!(/^\./, '\.')
+        regex = /^#{basename}\.#{hostname.downcase}#{extension}$/
+        file = files.grep(regex).first
         return File.join directory, file unless file.nil?
       end
       nil

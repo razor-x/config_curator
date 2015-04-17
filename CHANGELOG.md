@@ -1,5 +1,9 @@
 # ChangeLog
 
+## HEAD
+
+- Fix issue where wrong host-specific file would be installed.
+
 ## 0.2.3
 
 - Fix bug where component would not install
