@@ -3,6 +3,7 @@
 ## HEAD
 
 - Fix issue where wrong host-specific file would be installed.
+- Only display installed messaged if unit was actually installed.
 
 ## 0.2.3
 

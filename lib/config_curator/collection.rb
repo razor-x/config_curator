@@ -137,10 +137,10 @@ module ConfigCurator
     # @param quiet [Boolean] suppress some {#logger} output
     # @return [Boolean] if unit was installed
     def install_unit(unit, type, quiet = false)
-      unit.install
+      success = unit.install
       logger.info do
         "Installed #{type_name(type)}: #{unit.source} ⇨ #{unit.destination_path}"
-      end unless quiet
+      end unless quiet || !success
       return true
 
       rescue Unit::InstallFailed => e
