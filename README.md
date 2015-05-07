@@ -3,7 +3,7 @@
 <!--
 [![Gem Version](https://img.shields.io/gem/v/replace_gemname.svg)](https://rubygems.org/gems/replace_gemname)
 -->
-[![MIT License](https://img.shields.io/badge/license-MIT-red.svg)](./LICENSE.txt)
+[![MIT License](https://img.shields.io/github/license/makenew/ruby-gem.svg)](./LICENSE.txt)
 [![Dependency Status](https://img.shields.io/gemnasium/makenew/ruby-gem.svg)](https://gemnasium.com/makenew/ruby-gem)
 [![Build Status](https://img.shields.io/travis/makenew/ruby-gem.svg)](https://travis-ci.org/makenew/ruby-gem)
 [![Coverage Status](https://img.shields.io/coveralls/makenew/ruby-gem.svg)](https://coveralls.io/r/makenew/ruby-gem)
