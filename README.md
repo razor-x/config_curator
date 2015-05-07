@@ -4,10 +4,10 @@
 [![Gem Version](https://img.shields.io/gem/v/replace_gemname.svg)](https://rubygems.org/gems/replace_gemname)
 -->
 [![MIT License](https://img.shields.io/badge/license-MIT-red.svg)](./LICENSE.txt)
-[![Dependency Status](https://img.shields.io/gemnasium/razor-x/ruby-gem.svg)](https://gemnasium.com/razor-x/ruby-gem)
-[![Build Status](https://img.shields.io/travis/razor-x/ruby-gem.svg)](https://travis-ci.org/razor-x/ruby-gem)
-[![Coverage Status](https://img.shields.io/coveralls/razor-x/ruby-gem.svg)](https://coveralls.io/r/razor-x/ruby-gem)
-[![Code Climate](https://img.shields.io/codeclimate/github/razor-x/ruby-gem.svg)](https://codeclimate.com/github/razor-x/ruby-gem)
+[![Dependency Status](https://img.shields.io/gemnasium/makenew/ruby-gem.svg)](https://gemnasium.com/makenew/ruby-gem)
+[![Build Status](https://img.shields.io/travis/makenew/ruby-gem.svg)](https://travis-ci.org/makenew/ruby-gem)
+[![Coverage Status](https://img.shields.io/coveralls/makenew/ruby-gem.svg)](https://coveralls.io/r/makenew/ruby-gem)
+[![Code Climate](https://img.shields.io/codeclimate/github/makenew/ruby-gem.svg)](https://codeclimate.com/github/makenew/ruby-gem)
 
 Use this project freely as a base for your testable Ruby gems.
 
@@ -72,7 +72,7 @@ Note that `CHANGELOG.md` is just a template for this skeleton.
 The actual changes for this project are documented in the commit history
 and summarized under [Releases].
 
-[Releases]: https://github.com/razor-x/ruby-gem/releases
+[Releases]: https://github.com/makenew/ruby-gem/releases
 [The Unlicense]: http://unlicense.org/UNLICENSE
 
 #### Add future update support
@@ -99,7 +99,7 @@ which you can then merge into your other branches.
 If you later clone your repo you will need to create the update branch again.
 
 ```bash
-$ git remote add upstream https://github.com/razor-x/ruby-gem.git
+$ git remote add upstream https://github.com/makenew/ruby-gem.git
 $ git fetch upstream
 $ git checkout -b ruby-gem upstream/master
 ```
@@ -182,7 +182,7 @@ Please submit and comment on bug reports and feature requests.
 
 To submit a patch:
 
-1. Fork it (https://github.com/razor-x/ruby-gem/fork).
+1. Fork it (https://github.com/makenew/ruby-gem/fork).
 2. Create your feature branch (`git checkout -b my-new-feature`).
 3. Make changes. Write and run tests.
 4. Commit your changes (`git commit -am 'Add some feature'`).
