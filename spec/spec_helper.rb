@@ -1,12 +1,12 @@
-require 'coveralls'
 require 'simplecov'
+require 'codecov'
+
+SimpleCov.start
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
+  SimpleCov::Formatter::Codecov
 ]
-
-SimpleCov.start
 
 require 'replace_gemname'
 

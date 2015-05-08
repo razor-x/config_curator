@@ -6,7 +6,7 @@
 [![MIT License](https://img.shields.io/github/license/makenew/ruby-gem.svg)](./LICENSE.txt)
 [![Dependency Status](https://img.shields.io/gemnasium/makenew/ruby-gem.svg)](https://gemnasium.com/makenew/ruby-gem)
 [![Build Status](https://img.shields.io/travis/makenew/ruby-gem.svg)](https://travis-ci.org/makenew/ruby-gem)
-[![Coverage Status](https://img.shields.io/coveralls/makenew/ruby-gem.svg)](https://coveralls.io/r/makenew/ruby-gem)
+[![Coverage Status](https://img.shields.io/codecov/c/github/makenew/ruby-gem.svg)](https://codecov.io/github/makenew/ruby-gem)
 [![Code Climate](https://img.shields.io/codeclimate/github/makenew/ruby-gem.svg)](https://codeclimate.com/github/makenew/ruby-gem)
 
 Use this project freely as a base for your testable Ruby gems.
