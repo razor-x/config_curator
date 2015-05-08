@@ -130,8 +130,8 @@ The primary documentation for ReplaceGemname is this README and the YARD source 
 
 YARD documentation for all gem versions is hosted on the
 [ReplaceGemname gem page](https://rubygems.org/gems/replace_gemname).
-Documentation for the latest commits is hosted on
-[the RubyDoc.info project page](http://rubydoc.info/github/replace_username/replace_gemname/frames).
+Also checkout
+[Omniref's interactive documentation](https://www.omniref.com/ruby/gems/replace_gemname).
 
 ## Development and Testing
 
