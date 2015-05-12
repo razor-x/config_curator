@@ -46,7 +46,7 @@ or a unit type: `components`, `config_files`, or `symlinks`.
 Optional global Config Curator settings.
 Defaults listed below.
 
-````yaml
+```yaml
 # All units installed relative to the root.
 root: "~/"
 
@@ -54,7 +54,7 @@ root: "~/"
 # Will automatically detect if not explicitly set.
 # Available tools: pacman, dpkg, pkgng.
 package_tool:
-````
+```
 
 #### `defaults`
 
@@ -65,7 +65,7 @@ Any per-unit attribute will override the value here.
 Any attribute not set here will use
 the Config Curator defined defaults below.
 
-````yaml
+```yaml
 defaults:
   # File and directory permissions.
   # Empty values will not change permissions.
@@ -84,7 +84,7 @@ defaults:
   # Only install this unit if packages are present.
   # Empty array will not check for any packages.
   packages: []
-````
+```
 
 #### Units
 
@@ -110,7 +110,7 @@ Components are installed before other units.
 The source will be mirrored to the destination.
 **Any existing files in the destination will be lost.**
 
-````yaml
+```yaml
 components:
   - src: .config/terminator
 
@@ -119,7 +119,7 @@ components:
     fmode: 640
     dmode: 0750
     packages: [ tmux ]
-````
+```
 
 ##### Config files are copied individually
 
@@ -131,7 +131,7 @@ In this example, the files `.tmux.conf` and `.tmux.baz.conf` both exist:
 the first will be installed on hosts `foo` and `bar`,
 while the second will be installed on host `baz`.
 
-````yaml
+```yaml
 config_files:
   - src: .gitconfig
   - src: .bundle/config
@@ -143,7 +143,7 @@ config_files:
 
   - src: .tmux.conf
     hosts: [ foo, bar, baz ]
-````
+```
 
 ##### Symlinks
 
@@ -151,26 +151,26 @@ Symlinks create a symbolic link to the `src` at the `dst`.
 
 They are installed last.
 
-````yaml
+```yaml
 symlinks:
   - src: ~/Wallpaper/tux.png
     dst: .config/awesome/wall.png
     packages: [ awesome ]
-````
+```
 
 ### The `curate` command
 
 Once you have prepared your manifest, simply run
 
-````bash
+```bash
 $ curate
-````
+```
 
 Or if you prefer more verbose feedback
 
-````bash
+```bash
 $ curate -v
-````
+```
 
 You can always get help with
 
@@ -204,21 +204,21 @@ along with `manifest.yml` into version control.
 
 Add this line to your application's Gemfile:
 
-````ruby
+```ruby
 gem 'config_curator'
-````
+```
 
 And then execute:
 
-````bash
+```bash
 $ bundle
-````
+```
 
 Or install it yourself as:
 
-````bash
+```bash
 $ gem install config_curator
-````
+```
 
 ## Documentation
 
@@ -237,15 +237,15 @@ The [Config Curator source](https://github.com/razor-x/config_curator)
 is hosted on GitHub.
 To clone the project run
 
-````bash
+```bash
 $ git clone https://github.com/razor-x/config_curator.git
-````
+```
 
 ### Rake
 
 Run `rake -T` to see all Rake tasks.
 
-````
+```
 rake all                   # Run all tasks
 rake build                 # Build config_curator-0.0.0.gem into the pkg directory
 rake bump:current          # Show current gem version
@@ -260,7 +260,7 @@ rake rubocop               # Run RuboCop
 rake rubocop:auto_correct  # Auto-correct RuboCop offenses
 rake spec                  # Run RSpec code examples
 rake yard                  # Generate YARD Documentation
-````
+```
 
 ### Guard
 
