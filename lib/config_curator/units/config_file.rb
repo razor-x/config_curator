@@ -64,7 +64,6 @@ module ConfigCurator
 
     # Will look for files with the naming pattern `filename.hostname.ext`.
     # @param path [String] path to the non-host-specific file
-    # rubocop:disable Metrics/MethodLength
     def search_for_host_specific_file(path)
       directory = File.dirname path
       filename = File.basename path
