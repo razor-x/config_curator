@@ -138,7 +138,7 @@ Also checkout
 ### Source Code
 
 The [ReplaceGemname source](https://github.com/replace_username/replace_gemname)
-source is hosted on GitHub.
+is hosted on GitHub.
 To clone the project run
 
 ```bash
