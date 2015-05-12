@@ -247,15 +247,15 @@ Run `rake -T` to see all Rake tasks.
 
 ```
 rake all                   # Run all tasks
-rake build                 # Build config_curator-0.0.0.gem into the pkg directory
-rake bump:current          # Show current gem version
-rake bump:major            # Bump major part of gem version
-rake bump:minor            # Bump minor part of gem version
-rake bump:patch            # Bump patch part of gem version
-rake bump:pre              # Bump pre part of gem version
+rake build                 # Build config_curator-0.2.4.gem into the pkg directory
+rake bump:current[tag]     # Show current gem version
+rake bump:major[tag]       # Bump major part of gem version
+rake bump:minor[tag]       # Bump minor part of gem version
+rake bump:patch[tag]       # Bump patch part of gem version
+rake bump:pre[tag]         # Bump pre part of gem version
 rake bump:set              # Sets the version number using the VERSION environment variable
-rake install               # Build and install config_curator-0.0.0.gem into system gems
-rake release               # Create tag v0.0.0 and build and push config_curator-0.0.0.gem to Rubygems
+rake install               # Build and install config_curator-0.2.4.gem into system gems
+rake release               # Create tag v0.2.4 and build and push config_curator-0.2.4.gem to Rubygems
 rake rubocop               # Run RuboCop
 rake rubocop:auto_correct  # Auto-correct RuboCop offenses
 rake spec                  # Run RSpec code examples
