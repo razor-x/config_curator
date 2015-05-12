@@ -152,11 +152,11 @@ Run `rake -T` to see all Rake tasks.
 ```
 rake all                   # Run all tasks
 rake build                 # Build replace_gemname-0.0.0.gem into the pkg directory
-rake bump:current          # Show current gem version
-rake bump:major            # Bump major part of gem version
-rake bump:minor            # Bump minor part of gem version
-rake bump:patch            # Bump patch part of gem version
-rake bump:pre              # Bump pre part of gem version
+rake bump:current[tag]     # Show current gem version
+rake bump:major[tag]       # Bump major part of gem version
+rake bump:minor[tag]       # Bump minor part of gem version
+rake bump:patch[tag]       # Bump patch part of gem version
+rake bump:pre[tag]         # Bump pre part of gem version
 rake bump:set              # Sets the version number using the VERSION environment variable
 rake install               # Build and install replace_gemname-0.0.0.gem into system gems
 rake release               # Create tag v0.0.0 and build and push replace_gemname-0.0.0.gem to Rubygems
