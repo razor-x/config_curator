@@ -74,6 +74,7 @@ module ConfigCurator
     end
 
     # Installs the unit.
+    # @return [Boolean] if the unit was installed
     def install
       return false unless install?
       true

@@ -117,6 +117,28 @@ describe ConfigCurator::Unit do
       expect(unit).to receive(:packages_installed?)
       unit.install?
     end
+
+    context "when requirements are met" do
+      it "returns true" do
+        expect(unit).to receive(:allowed_host?).and_return(true)
+        expect(unit).to receive(:packages_installed?).and_return(true)
+        expect(unit.install?).to be true
+      end
+    end
+
+    context "when not on an allowed host" do
+      it "returns false" do
+        expect(unit).to receive(:allowed_host?).and_return(false)
+        expect(unit.install?).to be false
+      end
+    end
+
+    context "when required packages are not installed" do
+      it "returns false" do
+        expect(unit).to receive(:packages_installed?).and_return(false)
+        expect(unit.install?).to be false
+      end
+    end
   end
 
   describe "#allowed_host?" do
