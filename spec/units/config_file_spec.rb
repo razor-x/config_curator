@@ -45,6 +45,24 @@ describe ConfigCurator::ConfigFile do
     end
   end
 
+  describe "#uninstall" do
+    context "when config file should be uninstalled" do
+      it "uninstalls the config file and returns true" do
+        expect(config_file).to receive(:uninstall?).and_return(true)
+        expect(config_file).to receive(:uninstall_file)
+        expect(config_file.uninstall).to be true
+      end
+    end
+
+    context "when config file should not be uninstalled" do
+      it "does not uninstall the config file and returns false" do
+        expect(config_file).to receive(:uninstall?).and_return(false)
+        expect(config_file).to_not receive(:uninstall_file)
+        expect(config_file.uninstall).to be false
+      end
+    end
+  end
+
   describe "#install" do
     context "when config file should be installed" do
       it "installs the config file and returns true" do

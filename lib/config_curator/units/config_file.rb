@@ -23,6 +23,14 @@ module ConfigCurator
       @destination ||= @source
     end
 
+    # (see Unit#uninstall)
+    def uninstall(*args)
+      s = super(*args)
+      return s unless s
+      uninstall_file
+      true
+    end
+
     # (see Unit#install)
     def install
       s = super
@@ -43,6 +51,11 @@ module ConfigCurator
     end
 
     private
+
+    # Uninstalls the file by removing it.
+    def uninstall_file
+      FileUtils.remove_entry_secure destination_path if File.exist? destination_path
+    end
 
     # Recursively creates the necessary directories and install the file.
     def install_file
