@@ -8,6 +8,14 @@ module ConfigCurator
   class Component < Unit
     attr_accessor :fmode, :dmode, :owner, :group
 
+    # (see Unit#uninstall)
+    def uninstall(*args)
+      s = super(*args)
+      return s unless s
+      uninstall_component
+      true
+    end
+
     # (see Unit#install)
     def install
       s = super
@@ -29,6 +37,11 @@ module ConfigCurator
     end
 
     private
+
+    # Uninstalls the component by removing the directory.
+    def uninstall_component
+      FileUtils.remove_entry_secure destination_path if Dir.exist? destination_path
+    end
 
     # Recursively creates the necessary directories and installs the component.
     # Any files in the install directory not in the source directory are removed.

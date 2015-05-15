@@ -3,6 +3,24 @@ require 'spec_helper'
 describe ConfigCurator::Component do
   subject(:component) { ConfigCurator::Component.new }
 
+  describe "#uninstall" do
+    context "when component should be uninstalled" do
+      it "uninstalls the component and returns true" do
+        expect(component).to receive(:uninstall?).and_return(true)
+        expect(component).to receive(:uninstall_component)
+        expect(component.uninstall).to be true
+      end
+    end
+
+    context "when component should not be uninstalled" do
+      it "does not uninstall the component and returns false" do
+        expect(component).to receive(:uninstall?).and_return(false)
+        expect(component).to_not receive(:uninstall_component)
+        expect(component.uninstall).to be false
+      end
+    end
+  end
+
   describe "#install" do
     context "when component should be installed" do
       it "installs the component and returns true" do
