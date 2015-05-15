@@ -18,6 +18,9 @@ module ConfigCurator
       # Unit installed relative to this path.
       root: Dir.home,
 
+      # Automatically uninstall units that would not be installed.
+      uninstall: false,
+
       # Package tool to use. See #package_lookup.
       package_tool: nil
     }
@@ -71,6 +74,20 @@ module ConfigCurator
     # A {PackageLookup} object for this unit.
     def package_lookup
       @package_lookup ||= PackageLookup.new tool: options[:package_tool]
+    end
+
+    # Uninstalls the unit.
+    # @return [Boolean] if the unit was uninstalled
+    def uninstall(force: false)
+      return true if uninstall? || force
+      false
+    end
+
+    # Checks if the unit should be uninstalled.
+    # @return [Boolean] if the unit should be uninstalled
+    def uninstall?
+      return true if !install? && options[:uninstall]
+      false
     end
 
     # Installs the unit.

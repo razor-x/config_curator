@@ -91,6 +91,55 @@ describe ConfigCurator::Unit do
     end
   end
 
+  describe "#uninstall" do
+    context "when unit should be uninstalled" do
+      it "returns true" do
+        expect(unit).to receive(:uninstall?).and_return(true)
+        expect(unit.uninstall).to be true
+      end
+
+      it "returns true when uninstall is forced" do
+        expect(unit).to receive(:uninstall?).and_return(false)
+        expect(unit.uninstall force: true).to be true
+      end
+    end
+
+    context "when unit should not be uninstalled" do
+      it "returns false" do
+        expect(unit).to receive(:uninstall?).and_return(false)
+        expect(unit.uninstall).to be false
+      end
+    end
+  end
+
+  describe "#uninstall?" do
+    context "unit should not be installed" do
+      it "returns false by default" do
+        expect(unit).to receive(:install?).and_return(false)
+        expect(unit.uninstall?).to be false
+      end
+
+      it "returns true when uninstall option is set" do
+        unit.options[:uninstall] = true
+        expect(unit).to receive(:install?).and_return(false)
+        expect(unit.uninstall?).to be true
+      end
+    end
+
+    context "unit should be installed" do
+      it "returns false" do
+        expect(unit).to receive(:install?).and_return(true)
+        expect(unit.uninstall?).to be false
+      end
+
+      it "returns false when uninstall option is set" do
+        unit.options[:uninstall] = true
+        expect(unit).to receive(:install?).and_return(true)
+        expect(unit.uninstall?).to be false
+      end
+    end
+  end
+
   describe "#install" do
     context "when unit should be installed" do
       it "returns true" do

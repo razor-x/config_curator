@@ -1,5 +1,10 @@
 # ChangeLog
 
+## HEAD
+
+- Units have a new `uninstall` action.
+  See the README for details.
+
 ## 0.2.4
 
 - Fix issue where wrong host-specific file would be installed.
