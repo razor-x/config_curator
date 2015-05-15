@@ -3,6 +3,14 @@ module ConfigCurator
   # The {#destination_path} will be a link
   # that points to the {#source_path}.
   class Symlink < Unit
+    # (see Unit#uninstall)
+    def uninstall(*args)
+      s = super(*args)
+      return s unless s
+      uninstall_symlink
+      true
+    end
+
     # (see Unit#install)
     def install
       s = super
@@ -21,6 +29,11 @@ module ConfigCurator
     end
 
     private
+
+    # Uninstalls the symlink by removing it.
+    def uninstall_symlink
+      FileUtils.remove_entry_secure destination_path if File.exist? destination_path
+    end
 
     # Recursively creates the necessary directories and make the symlink.
     def install_symlink

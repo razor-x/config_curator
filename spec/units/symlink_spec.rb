@@ -3,6 +3,24 @@ require 'spec_helper'
 describe ConfigCurator::Symlink do
   subject(:symlink) { ConfigCurator::Symlink.new }
 
+  describe "#uninstall" do
+    context "when symlink should be uninstalled" do
+      it "uninstalls the symlink and returns true" do
+        expect(symlink).to receive(:uninstall?).and_return(true)
+        expect(symlink).to receive(:uninstall_symlink)
+        expect(symlink.uninstall).to be true
+      end
+    end
+
+    context "when symlink should not be uninstalled" do
+      it "does not uninstall the symlink and returns false" do
+        expect(symlink).to receive(:uninstall?).and_return(false)
+        expect(symlink).to_not receive(:uninstall_symlink)
+        expect(symlink.uninstall).to be false
+      end
+    end
+  end
+
   describe "#install" do
     context "when symbolic link should be installed" do
       it "installs the symbolic link and returns true" do
