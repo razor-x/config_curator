@@ -192,6 +192,13 @@ Config Curator is fully scriptable for easy inclusion into other Ruby programs.
 The API is well documented for this purpose
 (see [Documentation](#documentation) above).
 
+### Plugins
+
+Plugin support is
+[planned for an upcoming release](https://github.com/razor-x/config_curator/issues/8).
+If you like Config Curator and want to write a plugin,
+please let me know!
+
 ## Installation
 
 You can install the gem either with Bundler or directly.
