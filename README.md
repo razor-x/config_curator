@@ -30,6 +30,24 @@ e.g., file, directory, symbolic link, etc.,
 is actually a subclass of the more generic `Unit` type.
 Other types can be added simply by adding more subclasses.
 
+## Quick start
+
+1. Install the `config_curator` gem
+   (make sure installed gem binaries are in your PATH).
+
+2. Create a `manifest.yml` file, e.g.,
+
+  ```yaml
+  config_files:
+    - src: .config/git/config
+  ```
+
+3. Add `.config/git/config` to your project and run
+
+  ```bash
+  $ curate -v
+  ```
+
 ## Usage
 
 ### The `manifest.yml` file
