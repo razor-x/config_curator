@@ -49,7 +49,7 @@ module ConfigCurator
     def install_component
       if command? 'rsync'
         FileUtils.mkdir_p destination_path
-        cmd = [command?('rsync'), '-rt', '--del', '--links', "#{source_path}/", destination_path]
+        cmd = [command?('rsync'), '-rtc', '--del', '--links', "#{source_path}/", destination_path]
         logger.debug { "Running command: #{cmd.join ' '}" }
         system(*cmd)
       else

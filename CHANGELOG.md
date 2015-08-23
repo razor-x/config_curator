@@ -2,6 +2,7 @@
 
 ## HEAD
 
+- Force rsync to use checksums when installing components.
 - Units have a new `uninstall` action.
   See the README for details.
 
