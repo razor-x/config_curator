@@ -69,7 +69,7 @@ module ConfigCurator
 
       {fmode: 'f', dmode: 'd'}.each do |k, v|
         next if send(k).nil?
-        cmd = [find,  destination_path, '-type', v, '-exec']
+        cmd = [find, destination_path, '-type', v, '-exec']
         cmd.concat [chmod, send(k).to_s(8), '{}', '+']
         logger.debug { "Running command: #{cmd.join ' '}" }
         system(*cmd)

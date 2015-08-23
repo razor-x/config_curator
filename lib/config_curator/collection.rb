@@ -143,9 +143,9 @@ module ConfigCurator
       end unless quiet || !success
       return true
 
-      rescue Unit::InstallFailed => e
-        logger.fatal { "Halting install! Install attempt failed for #{type_name(type)}: #{e}" }
-        return false
+    rescue Unit::InstallFailed => e
+      logger.fatal { "Halting install! Install attempt failed for #{type_name(type)}: #{e}" }
+      return false
     end
 
     # Checks if a unit can be installed.
@@ -161,9 +161,9 @@ module ConfigCurator
       end unless quiet
       return true
 
-      rescue Unit::InstallFailed => e
-        logger.error { "Cannot install #{type_name(type)}: #{e}" }
-        return false
+    rescue Unit::InstallFailed => e
+      logger.error { "Cannot install #{type_name(type)}: #{e}" }
+      return false
     end
   end
 end
