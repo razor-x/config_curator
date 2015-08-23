@@ -285,6 +285,7 @@ rake bump:patch[tag]       # Bump patch part of gem version
 rake bump:pre[tag]         # Bump pre part of gem version
 rake bump:set              # Sets the version number using the VERSION environment variable
 rake install               # Build and install config_curator-0.2.4.gem into system gems
+rake install:local         # Build and install config_curator-0.2.4.gem into system gems without network access
 rake release               # Create tag v0.2.4 and build and push config_curator-0.2.4.gem to Rubygems
 rake rubocop               # Run RuboCop
 rake rubocop:auto_correct  # Auto-correct RuboCop offenses
