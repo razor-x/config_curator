@@ -1,6 +1,6 @@
 # ChangeLog
 
-## HEAD
+## 0.3.0
 
 - Force rsync to use checksums when installing components.
 - Units have a new `uninstall` action.
