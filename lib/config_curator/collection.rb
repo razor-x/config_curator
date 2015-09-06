@@ -139,7 +139,7 @@ module ConfigCurator
     def install_unit(unit, type, quiet = false)
       success = unit.install
       logger.info do
-        "Installed #{type_name(type)}: #{unit.source} ⇨ #{unit.destination_path}"
+        "Installed #{type_name(type)}: #{unit.source} => #{unit.destination_path}"
       end unless quiet || !success
       return true
 
@@ -157,7 +157,7 @@ module ConfigCurator
       unit.install?
       logger.info do
         "Testing install for #{type_name(type)}:" \
-        " #{unit.source} ⇨ #{unit.destination_path}"
+        " #{unit.source} => #{unit.destination_path}"
       end unless quiet
       return true
 
