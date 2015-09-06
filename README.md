@@ -101,6 +101,12 @@ defaults:
   # Only install this unit if packages are present.
   # Empty array will not check for any packages.
   packages: []
+
+  # Default backend to use for filesystem operations.
+  # Only affects components.
+  # Choices: :stdlib or :rsync.
+  # Empty will autoselect rsync if available and fallback to stdlib otherwise.
+  backend:
 ```
 
 #### Units

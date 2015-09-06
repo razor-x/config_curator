@@ -16,7 +16,7 @@ module ConfigCurator
     # such as {Unit#source} and {Unit#destination}.
     UNIT_ATTRIBUTES = {
       unit: %i(hosts packages),
-      component: %i(hosts packages fmode dmode owner group),
+      component: %i(hosts packages fmode dmode owner group backend),
       config_file: %i(hosts packages fmode owner group),
       symlink: %i(hosts packages)
     }

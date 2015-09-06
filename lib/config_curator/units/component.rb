@@ -6,7 +6,7 @@ module ConfigCurator
   # The contents of the {#destination_path} is
   # completely replaced by the contents of the {#source_path}.
   class Component < Unit
-    attr_accessor :fmode, :dmode, :owner, :group
+    attr_accessor :fmode, :dmode, :owner, :group, :backend
 
     # (see Unit#uninstall)
     def uninstall(*args)
@@ -47,7 +47,7 @@ module ConfigCurator
     # Any files in the install directory not in the source directory are removed.
     # Use rsync if available.
     def install_component
-      if command? 'rsync'
+      if (backend != :stdlib && command?('rsync')) || backend == :rsync
         FileUtils.mkdir_p destination_path
         cmd = [command?('rsync'), '-rtc', '--del', '--links', "#{source_path}/", destination_path]
         logger.debug { "Running command: #{cmd.join ' '}" }

@@ -1,5 +1,9 @@
 # ChangeLog
 
+## HEAD
+
+- Add `backend` option for components.
+
 ## 0.3.0
 
 - Force rsync to use checksums when installing components.
