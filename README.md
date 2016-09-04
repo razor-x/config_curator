@@ -69,7 +69,7 @@ root: "~/"
 
 # Package tool to use.
 # Will automatically detect if not explicitly set.
-# Available tools: pacman, dpkg, pkgng.
+# Available tools: pacman, dpkg, pkgng, brew.
 package_tool:
 ```
 

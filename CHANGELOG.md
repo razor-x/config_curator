@@ -1,5 +1,9 @@
 # ChangeLog
 
+## HEAD
+
+- Add Homebrew support.
+
 ## 0.4.0
 
 - Add `backend` option for components.
