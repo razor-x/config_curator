@@ -1,6 +1,6 @@
 # ChangeLog
 
-## HEAD
+## 0.5.0
 
 - Add Homebrew support.
 
