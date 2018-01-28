@@ -208,12 +208,6 @@ Options:
       [--debug], [--no-debug]
 ```
 
-#### Uninstalling units
-
-Currently all units have an uninstall method.
-Smart uninstall via `curate uninstall` is planned for an
-[upcoming release](https://github.com/razor-x/config_curator/issues/7).
-
 ### Scripting
 
 Config Curator is fully scriptable for easy inclusion into other Ruby programs.
