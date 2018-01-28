@@ -11,6 +11,13 @@ _Simple and intelligent configuration file management._
 
 ## Description
 
+📢 **NOTE:** Version 1 is the first and last stable release.
+Config Curator has been rewritten from scratch in Node.js:
+https://github.com/rxrc/curator.
+Users are encouraged to use the Node.js version
+which is much faster, has zero dependencies,
+and provides an improved feature set with a similar manifest format.
+
 Config Curator is a flexible configuration and dotfile manager.
 Simply define what to manage in `manifest.yml`,
 then run `curate` to install and update your **configuration units**.
