@@ -11,8 +11,8 @@ _Simple and intelligent configuration file management._
 
 ## Description
 
-📢 **NOTE:** Version 1 is the first and last stable release.
-Config Curator has been rewritten from scratch in Node.js:
+📢 Version 1 is the first and last stable release.
+Config Curator has been **rewritten from scratch in Node.js:**
 https://github.com/rxrc/curator.
 Users are encouraged to use the Node.js version
 which is much faster, has zero dependencies,
