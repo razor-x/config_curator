@@ -90,7 +90,7 @@ module ConfigCurator
 
     def brew(package)
       cmd = command? 'brew'
-      stdout = `${cmd} ls --versions ${package}`
+      stdout = `#{cmd} ls --versions #{package}`
       !stdout.empty?
     end
   end
