@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.0
+
+- Major version release.
+
 ## 0.5.0
 
 - Add Homebrew support.
